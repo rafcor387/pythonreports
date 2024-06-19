@@ -43,12 +43,12 @@ column_options2 = [col for col in column_options if col != selected_column]
 selected_column3 = st.selectbox('Selecciona una columna para el gráfico de barras:', column_options2)
 # Filtrar el DataFrame por el valor ingresado
 if filter_value:
+    filtered_df = df[df[selected_column3] <= float(filter_value)]
 
     # Mapa de los países filtrados
     st.text('Mapa de los países')
     st.map(filtered_df[['latitude', 'longitude']])
 
-    filtered_df = df[df[selected_column3] <= float(filter_value)]
     st.text('Países con un valor igual o menor a {}:'.format(filter_value))
     st.write(filtered_df[['Country/Other', selected_column3]])
 
