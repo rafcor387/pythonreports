@@ -34,4 +34,4 @@ st.map(df[['latitude', 'longitude']])
 
 st.text('Gráfico de torta de Total Cases por país') 
 total_cases_by_country = df.groupby('Country/Other')['Total Cases'].sum()
-st.pie_chart(total_cases_by_country)
+st.line_chart(total_cases_by_country)
