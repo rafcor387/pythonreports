@@ -41,7 +41,7 @@ st.bar_chart(df.set_index('Country/Other')[selected_column2])
 # Campo de texto para filtrar por valor
 filter_value = st.text_input('Escribe un valor para filtrar los países por debajo de él:', '')
 column_options3 = [col for col in column_options if col != selected_column and  col != selected_column2] 
-selected_column3 = st.selectbox('Selecciona una columna para el gráfico de barras:', column_options)
+selected_column3 = st.selectbox('Selecciona una columna para el gráfico de barras:', column_options3)
 # Filtrar el DataFrame por el valor ingresado
 if filter_value:
     filtered_df = df[df[selected_column3] <= float(filter_value)]
