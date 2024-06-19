@@ -5,9 +5,6 @@ from PIL import Image
 st.header('Gráficas utilizando Pandas', divider='rainbow')
 st.title("Resultados del Grand Prix de Países Bajos")
 
-image = Image.open('Verstappen-pole-lap-Zandvoort-Netherlands-2021.jpg')
-st.image(image, caption='Max Verstappen')
-
 
 st.text_input("¿Cuál es tu nombre?", key="name")
 st.session_state.name
