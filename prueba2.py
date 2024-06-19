@@ -29,6 +29,6 @@ df.loc[df['Country/Other'] == option]
 
 st.line_chart(
     df,
-    x = 'Total Cases',
-    y = 'Country/Other'
+    x = 'Country/Other',
+    y = 'Total Cases'
 )
