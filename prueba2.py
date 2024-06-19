@@ -5,19 +5,21 @@ import matplotlib.pyplot as plt
 st.header('Gráficas utilizando Pandas', divider='rainbow')
 st.title("Resultados del Covid en Africa")
 
+# Cargar el DataFrame
 df = pd.read_csv('covid_africa.csv')
 
 if st.checkbox('Mostrar dataframe'):
     st.write(df)
 
-option = st.selectbox(
-'Selecciona el pais: ',
-df['Country/Other'])
-'Tu selección: ', option
-df.loc[df['Country/Other'] == option]
+# Selección del país
+option = st.selectbox('Selecciona el país:', df['Country/Other'])
+st.text('Tu selección: ' + option)
 
+# Filtrar el DataFrame por el país seleccionado
+selected_country_df = df[df['Country/Other'] == option]
 
-st.text('Gráfico de lineas') 
+# Gráfico de líneas
+st.text('Gráfico de líneas') 
 # Opciones para el segundo selectbox (columna)
 column_options = [
     'Total Cases', 'Total Deaths', 'Total Recovered', 'Active Cases',
@@ -26,24 +28,13 @@ column_options = [
 # Widget de selección para la columna
 selected_column = st.selectbox('Selecciona una columna:', column_options)
 # Generar el gráfico de línea
-st.text(f'Gráfico de {selected_column} para todos los países')
-st.line_chart(df.set_index('Country/Other')[selected_column])
+st.line_chart(selected_country_df.set_index('Country/Other')[selected_column])
 
-
-
-
-
-# Opciones para el segundo selectbox (columna)
-column_options2 = [
-    'Total Cases', 'Total Deaths', 'Total Recovered', 'Active Cases',
-    'Tot Cases/ 1M pop', 'Deaths/ 1M pop', 'Total Tests', 'Tests/ 1M pop', 'Population'
-]
-
-# Widget de selección para la columna
-selected_column2 = st.selectbox('Selecciona una columna:', column_options2)
-
-# Generar el gráfico de barras
+# Gráfico de barras
 st.text('Gráfico de barras') 
+# Widget de selección para la columna de barras
+selected_column2 = st.selectbox('Selecciona una columna para el gráfico de barras:', column_options)
+# Generar el gráfico de barras
 st.bar_chart(df.set_index('Country/Other')[selected_column2])
 
 
