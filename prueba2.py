@@ -17,17 +17,26 @@ df['Country/Other'])
 df.loc[df['Country/Other'] == option]
 
 
-st.text('grafico de paises vs total de muertes')
-st.line_chart(
-df,
-x = 'Country/Other',
-y = 'Total Cases'
-)
+st.text('Gráfico de lineas') 
+# Opciones para el segundo selectbox (columna)
+column_options = [
+    'Total Cases', 'Total Deaths', 'Total Recovered', 'Active Cases',
+    'Tot Cases/ 1M pop', 'Deaths/ 1M pop', 'Total Tests', 'Tests/ 1M pop', 'Population'
+]
+# Widget de selección para la columna
+selected_column = st.selectbox('Selecciona una columna:', column_options)
+# Generar el gráfico de línea
+st.text(f'Gráfico de {selected_column} para todos los países')
+st.line_chart(df.set_index('Country/Other')[selected_column])
 
-st.text('Gráfico de barras de muertes por país') 
-st.bar_chart(
-    df.groupby('Country/Other')['Total Deaths'].sum()
-)
+
+st.text('Gráfico de barras') 
+# Widget de selección para la columna
+selected_column2 = st.selectbox('Selecciona una columna:', column_options)
+# Generar el gráfico de línea
+st.bar_chart(df.set_index('Country/Other')[selected_column])
+
+
 
 st.text('Mapa de los países') 
 st.map(df[['latitude', 'longitude']])
@@ -49,15 +58,3 @@ st.pyplot(fig)
 
 
 
-# Opciones para el segundo selectbox (columna)
-column_options = [
-    'Total Cases', 'Total Deaths', 'Total Recovered', 'Active Cases',
-    'Tot Cases/ 1M pop', 'Deaths/ 1M pop', 'Total Tests', 'Tests/ 1M pop', 'Population'
-]
-
-# Widget de selección para la columna
-selected_column = st.selectbox('Selecciona una columna:', column_options)
-
-# Generar el gráfico de línea
-st.text(f'Gráfico de {selected_column} para todos los países')
-st.line_chart(df.set_index('Country/Other')[selected_column])
