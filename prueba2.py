@@ -34,8 +34,10 @@ st.map(df[['latitude', 'longitude']])
 
 
 
-# Gráfico de torta de Total Cases por país para los 10 primeros países
-total_cases_by_country = df.set_index('Country/Other')['Total Cases']
+# Seleccionar los 10 países con más muertes
+top_10_countries_by_deaths = df.nlargest(10, 'Total Deaths')
+# Gráfico de torta de Total Cases por país para los 10 países con más muertes
+total_cases_by_country = top_10_countries_by_deaths.set_index('Country/Other')['Total Cases']
 # Crear gráfico de torta con Matplotlib
 fig, ax = plt.subplots()
 ax.pie(total_cases_by_country, labels=total_cases_by_country.index, autopct='%1.1f%%', startangle=140)
