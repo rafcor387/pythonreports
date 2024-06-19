@@ -1,35 +1,41 @@
-import pandas as pd 
+import geopandas as gpd
+import pandas as pd
 import matplotlib.pyplot as plt
 
-# Leer el archivo CSV
-csv = pd.read_csv('fallecidos_covid.csv', sep=';')
+# Leer el archivo naturalearth.land para obtener datos del mundo
+world = gpd.read_file(gpd.datasets.get_path('naturalearth_lowres'))
 
-# Crear un DataFrame con las columnas seleccionadas usando una lista en lugar de un conjunto
-dataframe = pd.DataFrame(csv[['FECHA_FALLECIMIENTO', 'SEXO', 'DEPARTAMENTO']])
+# Crear un recorte para África
+bbox_africa = [-20, -40, 60, 40]  # Borde de África (aproximado)
 
-# Contar los valores en la columna "SEXO"
-sexo = dataframe['SEXO'].value_counts()
+# Filtrar el mapa para África
+africa = world.cx[bbox_africa[0]:bbox_africa[2], bbox_africa[1]:bbox_africa[3]]
 
-# Contar los valores en la columna "DEPARTAMENTO" y seleccionar los primeros 5
-departamento = dataframe['DEPARTAMENTO'].value_counts().head()
+# Leer los datos de los países africanos desde el archivo CSV
+geo_data = pd.read_csv('C:\\Users\\rafco\\Desktop\\pythonreports\\covid_africa.csv')
 
-# Imprimir los valores de "DEPARTAMENTO"
-print(departamento)
+# Crear un GeoDataFrame a partir de los datos de latitud y longitud
+gdf = gpd.GeoDataFrame(
+    geo_data, geometry=gpd.points_from_xy(geo_data.longitude, geo_data.latitude))
 
-# Grafica 1
-plt.subplot(1, 2, 1)
-sexo.plot(kind='pie', autopct='%1.01f%%')
-plt.title('SEXO')
+# Configurar el sistema de coordenadas
+gdf = gdf.set_crs(epsg=4326)
 
-# Grafica 2
-plt.subplot(1, 2, 2)
-departamento.plot(kind='bar', rot=20)
-plt.xticks(fontsize=9)
-plt.yticks(fontsize=9)
-plt.title('DEPARTAMENTO')
+# Crear la figura y los ejes
+fig, ax = plt.subplots(1, 1, figsize=(15, 15))
 
-# Título principal
-plt.suptitle('GRAFICA COVID 19 - FALLECIDOS')
+# Plotear el mapa de África
+africa.plot(ax=ax, color='white', edgecolor='black')
 
-# Mostrar las gráficas
+# Agregar los puntos de los países
+gdf.plot(ax=ax, color='red', markersize=10, label='Country')
+
+# Agregar etiquetas de países
+for x, y, label in zip(gdf.geometry.x, gdf.geometry.y, gdf['Country/Other']):
+    ax.text(x, y, label, fontsize=8, ha='right')
+
+# Configurar la leyenda de forma horizontal
+legend = ax.legend(loc='upper center', bbox_to_anchor=(0.5, -0.05), ncol=5, frameon=False)
+
+# Mostrar el mapa
 plt.show()
