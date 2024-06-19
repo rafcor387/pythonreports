@@ -15,7 +15,7 @@ st.session_state.name
 st.text('¡Hola '+st.session_state.name+' !') 
 'Hola cómo estás? ',st.session_state.name
 
-df = pd.read_csv('https://raw.githubusercontent.com/LilianaC/streamlit3/main/Datos%20F1%20Dutch%20GP%20-%20Sheet1.csv')
+df = pd.read_csv('covid_africa.csv')
 
 if st.checkbox('Mostrar dataframe'):
     df
