@@ -1,28 +1,28 @@
 import pandas as pd
 import streamlit as st
-from PIL import Image
 
 st.header('Gráficas utilizando Pandas', divider='rainbow')
 st.title("Resultados del Covid en Africa")
 
-
 df = pd.read_csv('covid_africa.csv')
 
 if st.checkbox('Mostrar dataframe'):
-    df
-
+    st.write(df)
 
 option = st.selectbox(
-    'Selecciona el pais: ',
-     df['Country/Other'])
+    'Selecciona el país: ',
+    df['Country/Other'])
 
 'Tu selección: ', option
 
-df.loc[df['Country/Other'] == option]
+country_df = df.loc[df['Country/Other'] == option]
 
-
+st.text('Gráfico de países vs total de muertes') 
 st.line_chart(
-    df,
-    x = 'Country/Other',
-    y = 'Total Cases'
+    country_df['Total Deaths']
+)
+
+st.text('Gráfico de barras de muertes por país') 
+st.bar_chart(
+    df.groupby('Country/Other')['Total Deaths'].sum()
 )
