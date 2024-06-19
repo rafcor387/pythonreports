@@ -19,16 +19,16 @@ if st.checkbox('Mostrar dataframe'):
 
 
 option = st.selectbox(
-    'Selecciona tu corredor favorito: ',
-     df['DRIVER'])
+    'Selecciona el pais: ',
+     df['Country/Other'])
 
 'Tu selección: ', option
 
-df.loc[df['DRIVER'] == option]
+df.loc[df['Country/Other'] == option]
 
 
 st.line_chart(
     df,
-    x = 'AVG SPEED',
-    y = 'LAP'
+    x = 'Total Cases',
+    y = 'Country/Other'
 )
