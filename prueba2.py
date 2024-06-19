@@ -1,6 +1,5 @@
 import pandas as pd
 import streamlit as st
-import folium
 
 st.header('Gráficas utilizando Pandas', divider='rainbow')
 st.title("Resultados del Covid en Africa")
