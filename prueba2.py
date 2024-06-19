@@ -18,6 +18,7 @@ st.text('Tu selección: ' + option)
 # Filtrar el DataFrame por el país seleccionado
 selected_country_df = df[df['Country/Other'] == option]
 
+
 # Gráfico de líneas
 st.text('Gráfico de líneas') 
 # Opciones para el segundo selectbox (columna)
@@ -30,14 +31,18 @@ selected_column = st.selectbox('Selecciona una columna:', column_options)
 # Generar el gráfico de línea
 st.line_chart(selected_country_df.set_index('Country/Other')[selected_column])
 
+
 # Gráfico de barras
 st.text('Gráfico de barras') 
+# Opciones para el segundo selectbox (columna)
+column_options2 = [
+    'Total Cases', 'Total Deaths', 'Total Recovered', 'Active Cases',
+    'Tot Cases/ 1M pop', 'Deaths/ 1M pop', 'Total Tests', 'Tests/ 1M pop', 'Population'
+]
 # Widget de selección para la columna de barras
-selected_column2 = st.selectbox('Selecciona una columna para el gráfico de barras:', column_options)
+selected_column2 = st.selectbox('Selecciona una columna para el gráfico de barras:', column_options2)
 # Generar el gráfico de barras
 st.bar_chart(df.set_index('Country/Other')[selected_column2])
-
-
 
 
 
