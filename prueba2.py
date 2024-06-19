@@ -3,7 +3,7 @@ from PIL import Image
 
 st.set_page_config(page_title="Prueboita",layout="wide")
 
-#introdfsdf
+#intro
 
 with st.container():
     st.header("Hola, soy la prueba")
