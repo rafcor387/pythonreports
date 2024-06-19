@@ -19,23 +19,18 @@ df.loc[df['Country/Other'] == option]
 
 # Gráfico de líneas
 st.text('Gráfico de líneas') 
-# Opciones para el primer selectbox (columna)
 column_options = [
     'Total Cases', 'Total Deaths', 'Total Recovered', 'Active Cases',
     'Tot Cases/ 1M pop', 'Deaths/ 1M pop', 'Total Tests', 'Tests/ 1M pop', 'Population'
 ]
-# Widget de selección para el primer gráfico
 selected_column = st.selectbox('Selecciona una columna para el gráfico de líneas:', column_options)
-# Generar el gráfico de línea
 st.line_chart(df.set_index('Country/Other')[selected_column])
 
-# Gráfico de barras
+
+
 st.text('Gráfico de barras') 
-# Opciones para el segundo selectbox (columna)
-column_options2 = [col for col in column_options if col != selected_column]  # Eliminar la columna seleccionada para evitar duplicados
-# Widget de selección para el segundo gráfico
+column_options2 = [col for col in column_options if col != selected_column] 
 selected_column2 = st.selectbox('Selecciona una columna para el gráfico de barras:', column_options2)
-# Generar el gráfico de barras
 st.bar_chart(df.set_index('Country/Other')[selected_column2])
 
 
@@ -43,15 +38,18 @@ st.bar_chart(df.set_index('Country/Other')[selected_column2])
 
 
 
+# Campo de texto para filtrar por valor
+filter_value = st.text_input('Escribe un valor para filtrar los países por debajo de él:', '')
 
+# Filtrar el DataFrame por el valor ingresado
+if filter_value:
+    filtered_df = df[df[selected_column] <= float(filter_value)]
+    st.text('Países con un valor igual o menor a {}:'.format(filter_value))
+    st.write(filtered_df[['Country/Other', selected_column]])
 
-
-
-
-
-
-st.text('Mapa de los países') 
-st.map(df[['latitude', 'longitude']])
+    # Mapa de los países filtrados
+    st.text('Mapa de los países')
+    st.map(filtered_df[['latitude', 'longitude']])
 
 
 
