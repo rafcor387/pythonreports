@@ -3,14 +3,8 @@ import streamlit as st
 from PIL import Image
 
 st.header('Gráficas utilizando Pandas', divider='rainbow')
-st.title("Resultados del Grand Prix de Países Bajos")
+st.title("Resultados del Covid en Africa")
 
-
-st.text_input("¿Cuál es tu nombre?", key="name")
-st.session_state.name
-
-st.text('¡Hola '+st.session_state.name+' !') 
-'Hola cómo estás? ',st.session_state.name
 
 df = pd.read_csv('covid_africa.csv')
 
