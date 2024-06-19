@@ -10,19 +10,27 @@ if st.checkbox('Mostrar dataframe'):
     st.write(df)
 
 option = st.selectbox(
-    'Selecciona el país: ',
-    df['Country/Other'])
-
+'Selecciona el pais: ',
+df['Country/Other'])
 'Tu selección: ', option
+df.loc[df['Country/Other'] == option]
 
-country_df = df.loc[df['Country/Other'] == option]
 
-st.text('Gráfico de países vs total de muertes') 
+st.text('grafico de paises vs total de muertes')
 st.line_chart(
-    country_df['Total Deaths']
+df,
+x = 'Country/Other',
+y = 'Total Cases'
 )
 
 st.text('Gráfico de barras de muertes por país') 
 st.bar_chart(
     df.groupby('Country/Other')['Total Deaths'].sum()
 )
+
+st.text('Mapa de los países') 
+m = folium.Map(location=[0, 0], zoom_start=2)
+
+for index, row in df.iterrows():
+    folium.Marker(location=[row['latitude'], row['longitude']], popup=row['Country/Other']).add_to(m)
+st.write(m)
