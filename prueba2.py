@@ -6,7 +6,7 @@ import seaborn as sns
 # Cargar los datos
 data = pd.read_csv("tus_datos.csv")
 
-# Widget para seleccionar país
+# Widget para seleccionar pa
 selected_country = st.selectbox("Selecciona un país", data["Country/Other"].unique())
 
 # Widget para seleccionar tipo de reporte
