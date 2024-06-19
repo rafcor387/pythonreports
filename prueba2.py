@@ -30,7 +30,7 @@ st.line_chart(df.set_index('Country/Other')[selected_column])
 
 st.text('Gráfico de barras') 
 column_options2 = [col for col in column_options if col != selected_column] 
-selected_column2 = st.selectbox('Selecciona una columna para el gráfico de barras:', column_options2)
+selected_column2 = st.selectbox('Selecciona una columna para el gráfico de barras:', column_options)
 st.bar_chart(df.set_index('Country/Other')[selected_column2])
 
 
