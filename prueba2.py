@@ -31,10 +31,14 @@ st.line_chart(df.set_index('Country/Other')[selected_column])
 
 
 st.text('Gráfico de barras') 
+column_options2 = [
+    'Total Cases', 'Total Deaths', 'Total Recovered', 'Active Cases',
+    'Tot Cases/ 1M pop', 'Deaths/ 1M pop', 'Total Tests', 'Tests/ 1M pop', 'Population'
+]
 # Widget de selección para la columna
-selected_column2 = st.selectbox('Selecciona una columna:', column_options)
+selected_column2 = st.selectbox('Selecciona una columna:', column_options2)
 # Generar el gráfico de línea
-st.bar_chart(df.set_index('Country/Other')[selected_column])
+st.bar_chart(df.set_index('Country/Other')[selected_column2])
 
 
 
