@@ -33,9 +33,14 @@ st.text('Mapa de los países')
 st.map(df[['latitude', 'longitude']])
 
 
+
+# Gráfico de torta de Total Cases por país
+total_cases_by_country = df.set_index('Country/Other')['Total Cases']
+
 # Crear gráfico de torta con Matplotlib
 fig, ax = plt.subplots()
 ax.pie(total_cases_by_country, labels=total_cases_by_country.index, autopct='%1.1f%%', startangle=140)
 ax.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
+
 # Mostrar el gráfico utilizando st.pyplot()
 st.pyplot(fig)
