@@ -49,26 +49,15 @@ st.pyplot(fig)
 
 
 
-
-# Opciones para el selectbox (columna)
+# Opciones para el segundo selectbox (columna)
 column_options = [
     'Total Cases', 'Total Deaths', 'Total Recovered', 'Active Cases',
     'Tot Cases/ 1M pop', 'Deaths/ 1M pop', 'Total Tests', 'Tests/ 1M pop', 'Population'
 ]
 
-# Opciones para el selectbox (tipo de reporte)
-report_type_options = ['line', 'pie']
-
-# Widgets de selección
+# Widget de selección para la columna
 selected_column = st.selectbox('Selecciona una columna:', column_options)
-selected_report_type = st.selectbox('Selecciona un tipo de reporte:', report_type_options)
 
-# Generar el gráfico según el tipo de reporte seleccionado
-if selected_report_type == 'line':
-    st.text(f'Gráfico de línea de {selected_column} para todos los países')
-    for country in df['Country/Other'].unique():
-        country_df = df[df['Country/Other'] == country]
-        st.line_chart(country_df[selected_column])
-elif selected_report_type == 'pie':
-    st.text(f'Gráfico de torta de {selected_column} para todos los países')
-    st.text('No implementado todavía')  # Aquí puedes implementar el gráfico de torta usando Matplotlib o Plotly
+# Generar el gráfico de línea
+st.text(f'Gráfico de {selected_column} para todos los países')
+st.line_chart(df.set_index('Country/Other')[selected_column])
