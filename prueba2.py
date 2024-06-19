@@ -17,32 +17,26 @@ df['Country/Other'])
 df.loc[df['Country/Other'] == option]
 
 
-st.text('Gráfico de lineas') 
-# Opciones para el segundo selectbox (columna)
+# Gráfico de líneas
+st.text('Gráfico de líneas') 
+# Opciones para el primer selectbox (columna)
 column_options = [
     'Total Cases', 'Total Deaths', 'Total Recovered', 'Active Cases',
     'Tot Cases/ 1M pop', 'Deaths/ 1M pop', 'Total Tests', 'Tests/ 1M pop', 'Population'
 ]
-# Widget de selección para la columna
-selected_column = st.selectbox('Selecciona una columna:', column_options)
+# Widget de selección para el primer gráfico
+selected_column = st.selectbox('Selecciona una columna para el gráfico de líneas:', column_options)
 # Generar el gráfico de línea
-st.text(f'Gráfico de {selected_column} para todos los países')
 st.line_chart(df.set_index('Country/Other')[selected_column])
 
-
-
-
-# Generar el gráfico de barras
+# Gráfico de barras
 st.text('Gráfico de barras') 
 # Opciones para el segundo selectbox (columna)
-column_options2 = [
-    'Total Cases', 'Total Deaths', 'Total Recovered', 'Active Cases',
-    'Tot Cases/ 1M pop', 'Deaths/ 1M pop', 'Total Tests', 'Tests/ 1M pop', 'Population'
-]
-# Widget de selección para la columna
-selected_column2 = st.selectbox('Selecciona una columna:', column_options2)
+column_options2 = [col for col in column_options if col != selected_column]  # Eliminar la columna seleccionada para evitar duplicados
+# Widget de selección para el segundo gráfico
+selected_column2 = st.selectbox('Selecciona una columna para el gráfico de barras:', column_options2)
+# Generar el gráfico de barras
 st.bar_chart(df.set_index('Country/Other')[selected_column2])
-
 
 
 
