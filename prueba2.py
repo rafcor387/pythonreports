@@ -34,4 +34,5 @@ m = folium.Map(location=[0, 0], zoom_start=2)
 
 for index, row in df.iterrows():
     folium.Marker(location=[row['latitude'], row['longitude']], popup=row['Country/Other']).add_to(m)
+
 st.write(m)
