@@ -11,10 +11,10 @@ if st.checkbox('Mostrar dataframe'):
     st.write(df)
 
 option = st.selectbox(
-'Selecciona el pais: ',
-df['Country/Other'])
+'Selecciona el cliente: ',
+df['cliente'])
 'Tu selección: ', option
-df.loc[df['Country/Other'] == option]
+df.loc[df['cliente'] == option]
 
 
 # Gráfico de líneas
