@@ -3,7 +3,7 @@ import streamlit as st
 import matplotlib.pyplot as plt
 
 st.header('Gráficas utilizando Pandas y streamlit', divider='rainbow')
-st.title("Resultados del Covid en Africa")
+st.title("Resultados de analisis de discotecas")
 
 df = pd.read_csv('datasetdisco.csv')
 
