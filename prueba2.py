@@ -34,3 +34,20 @@ filtered_data = df[(df['fechaHora'].dt.date == date_input) & (df['nombre'] == se
 
 # Muestra el número de registros con esa fecha y ubicación iguales
 st.text(f'El número de registros con esa fecha y ubicación iguales es: {len(filtered_data)}')
+
+# Calcula el porcentaje de cada nombre con respecto al total de filas
+nombre_counts = filtered_data['nombre'].value_counts()
+percentage = (nombre_counts / len(filtered_data)) * 100
+
+# Crea un gráfico de pastel usando Matplotlib
+fig, ax = plt.subplots()
+ax.pie(nombre_counts, labels=nombre_counts.index, autopct='%1.1f%%', startangle=90)
+ax.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
+ax.set_title(f'Distribución de nombres para {selected_location} en la fecha seleccionada')
+
+# Muestra el gráfico de pastel
+st.pyplot(fig)
+
+# Muestra el porcentaje de cada nombre
+st.write("Porcentaje de cada nombre:")
+st.write(percentage)
