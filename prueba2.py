@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 st.header('Gráficas utilizando Pandas y streamlit', divider='rainbow')
 st.title("Resultados del Covid en Africa")
 
-df = pd.read_csv('prueba.csv')
+df = pd.read_csv('prueba_sin_comillas.csv')
 
 if st.checkbox('Mostrar dataframe'):
     st.write(df)
