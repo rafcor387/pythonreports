@@ -5,8 +5,8 @@ def quitar_comillas(input_file, output_file):
         with open(input_file, 'r') as f_input:
             contenido = f_input.read()
         
-        #contenido_sin_comillas = contenido.replace('"', '')
-        contenido_sin_comillas = contenido.replace(';', ',')
+        contenido_sin_comi = contenido.replace('"', '')
+        contenido_sin_comillas = contenido_sin_comi.replace(';', ',')
 
         with open(output_file, 'w') as f_output:
             f_output.write(contenido_sin_comillas)
