@@ -1,5 +1,6 @@
 import pandas as pd
 import streamlit as st
+from datetime import datetime
 import matplotlib.pyplot as plt
 
 st.header('Gráficas utilizando Pandas y streamlit', divider='rainbow')
@@ -10,11 +11,17 @@ df = pd.read_csv('datasetdisco.csv')
 if st.checkbox('Mostrar dataframe'):
     st.write(df)
 
+
 option = st.selectbox(
 'Selecciona el cliente: ',
 df['cliente'])
 'Tu selección: ', option
 df.loc[df['cliente'] == option]
+
+
+#pa fecha 
+# Campo de texto para filtrar por fecha
+date_input = st.date_input('Selecciona una fecha:', datetime.today())
 
 
 # Gráfico de líneas
@@ -53,11 +60,13 @@ if filter_value:
     st.write(filtered_df[['Country/Other', selected_column3]])
 
 
+
+
 column_options3 = [col for col in column_options if col != selected_column and  col != selected_column2] 
 # Seleccionar los 10 países con más muertes
-top_10_countries_by_deaths = df.nlargest(10, 'Total Deaths')
+top_10_countries_by_deaths = df.nlargest(10, '')
 # Gráfico de torta de Total Cases por país para los 10 países con más muertes
-total_cases_by_country = top_10_countries_by_deaths.set_index('Country/Other')['Total Cases']
+total_cases_by_country = top_10_countries_by_deaths.set_index('nombre')['Total Cases']
 # Crear gráfico de torta con Matplotlib
 fig, ax = plt.subplots()
 ax.pie(total_cases_by_country, labels=total_cases_by_country.index, autopct='%1.1f%%', startangle=140)
