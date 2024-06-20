@@ -20,23 +20,14 @@ df.loc[df['cliente'] == option]
 
 
 #pa fecha 
-# Convertir la columna 'fecha' a tipo datetime
-df['fecha'] = pd.to_datetime(df['fecha'])
-
-# Graficar
-st.header('Gráfico de Pie por Nombre y Fecha')
-selected_date = st.date_input('Selecciona una fecha:', df['fecha'].unique())
-
-filtered_df = df[df['fecha'] == selected_date]
-count_by_name = filtered_df['nombre'].value_counts()
-
-st.write(count_by_name)
-
-# Gráfico de pie
-fig, ax = plt.subplots()
-ax.pie(count_by_name, labels=count_by_name.index, autopct='%1.1f%%', startangle=90)
-ax.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
-st.pyplot(fig)
+# Establece la fecha por defecto
+default_date = datetime(2023, 1, 1)
+# Campo de texto para filtrar por fecha con fecha por defecto
+date_input = st.date_input('Selecciona una fecha:', default_date)
+# Filtra los registros que coinciden con la fecha seleccionada
+filtered_data = df[df['fechaHora'].dt.date == date_input]
+# Muestra el número de registros con esa fecha
+st.text(f'El número de registros con esa fecha es: {len(filtered_data)}')
 
 
 
