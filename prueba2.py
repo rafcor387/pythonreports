@@ -20,8 +20,27 @@ df.loc[df['cliente'] == option]
 
 
 #pa fecha 
-# Campo de texto para filtrar por fecha
-date_input = st.date_input('Selecciona una fecha:', datetime.today())
+# Convertir la columna 'fecha' a tipo datetime
+df['fecha'] = pd.to_datetime(df['fecha'])
+
+# Graficar
+st.header('Gráfico de Pie por Nombre y Fecha')
+selected_date = st.date_input('Selecciona una fecha:', df['fecha'].unique())
+
+filtered_df = df[df['fecha'] == selected_date]
+count_by_name = filtered_df['nombre'].value_counts()
+
+st.write(count_by_name)
+
+# Gráfico de pie
+fig, ax = plt.subplots()
+ax.pie(count_by_name, labels=count_by_name.index, autopct='%1.1f%%', startangle=90)
+ax.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
+st.pyplot(fig)
+
+
+
+
 
 
 # Gráfico de líneas
