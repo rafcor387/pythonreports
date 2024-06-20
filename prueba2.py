@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 st.header('Gráficas utilizando Pandas', divider='rainbow')
 st.title("Resultados del Covid en Africa")
 
-df = pd.read_csv('covid_africa.csv')
+df = pd.read_csv('prueba.csv')
 
 if st.checkbox('Mostrar dataframe'):
     st.write(df)
@@ -51,10 +51,6 @@ if filter_value:
 
     st.text('Países con un valor igual o menor a {}:'.format(filter_value))
     st.write(filtered_df[['Country/Other', selected_column3]])
-
-
-
-
 
 
 column_options3 = [col for col in column_options if col != selected_column and  col != selected_column2] 
