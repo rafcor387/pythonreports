@@ -41,6 +41,42 @@ ax.set_title(f'Distribución de reservas realizadas por fecha seleccionada: {dat
 # Muestra el gráfico de pastel
 st.pyplot(fig)
 # Muestra el número total de filas
-st.write(f'Total de filas para la fecha {date_input}: {len(filtered_data)}')
+st.write(f'Total de reservas para la fecha {date_input}: {len(filtered_data)}')
 # Campo de selección para elegir entre Forum, Pacha, Zouk Boulevard
 #selected_location = st.selectbox('Selecciona una ubicación:', ['Forum', 'Pacha', 'Zouk Boulevard'])
+
+
+
+
+
+
+
+
+
+# Campo de selección para elegir un mes
+months = {
+    'Enero': 1, 'Febrero': 2, 'Marzo': 3, 'Abril': 4,
+    'Mayo': 5, 'Junio': 6, 'Julio': 7, 'Agosto': 8,
+    'Septiembre': 9, 'Octubre': 10, 'Noviembre': 11, 'Diciembre': 12
+}
+selected_month = st.selectbox('Selecciona un mes:', list(months.keys()))
+
+# Filtra los registros que coinciden con el mes seleccionado
+month_num = months[selected_month]
+filtered_data_month = df[df['fechaHora'].dt.month == month_num]
+
+# Cuenta el número de filas para cada día del mes
+daily_counts = filtered_data_month['fechaHora'].dt.day.value_counts().sort_index()
+
+# Crea un gráfico de líneas usando Matplotlib
+fig, ax = plt.subplots()
+ax.plot(daily_counts.index, daily_counts.values, marker='o')
+ax.set_xlabel('Día del mes')
+ax.set_ylabel('Número de filas')
+ax.set_title(f'Número de filas por día en {selected_month}')
+
+# Muestra el gráfico de líneas
+st.pyplot(fig)
+
+# Muestra el DataFrame filtrado (opcional)
+st.write(filtered_data_month)
