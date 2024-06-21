@@ -38,10 +38,9 @@ ax.legend(
     title='Discotecas', loc='center left', bbox_to_anchor=(1, 0, 0.5, 1))
 ax.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
 ax.set_title(f'Distribución de reservas realizadas por fecha seleccionada: {date_input}')
-# Muestra el número total de filas
-st.write(f'Total de filas para la fecha {date_input}: {len(filtered_data)}')
 # Muestra el gráfico de pastel
 st.pyplot(fig)
-
+# Muestra el número total de filas
+st.write(f'Total de filas para la fecha {date_input}: {len(filtered_data)}')
 # Campo de selección para elegir entre Forum, Pacha, Zouk Boulevard
 #selected_location = st.selectbox('Selecciona una ubicación:', ['Forum', 'Pacha', 'Zouk Boulevard'])
