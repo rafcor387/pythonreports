@@ -36,10 +36,10 @@ wedges, texts, autotexts = ax.pie(
     nombre_counts, labels=nombre_counts.index, autopct='%1.1f%%', startangle=90)
 # Configura la leyenda
 ax.legend(
-    wedges, [f'{name}: {count} filas' for name, count in nombre_counts.items()],
-    title='Nombres', loc='center left', bbox_to_anchor=(1, 0, 0.5, 1))
+    wedges, [f'{name}: {count} reservas' for name, count in nombre_counts.items()],
+    title='Discotecas', loc='center left', bbox_to_anchor=(1, 0, 0.5, 1))
 ax.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
-ax.set_title(f'Distribución de nombres para la fecha seleccionada: {date_input}')
+ax.set_title(f'Distribución de discotecas para la fecha seleccionada: {date_input}')
 # Muestra el gráfico de pastel
 st.pyplot(fig)
 # Muestra el número total de filas
