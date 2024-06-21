@@ -72,7 +72,8 @@ daily_counts = filtered_data['fechaHora'].dt.day.value_counts().sort_index()
 
 # Crea un gráfico de líneas usando Matplotlib
 fig, ax = plt.subplots()
-ax.bar(daily_counts.index, daily_counts.values, marker='o')
+#ax.plot(daily_counts.index, daily_counts.values, marker='o')
+ax.bar(daily_counts.index, daily_counts.values)
 ax.set_xlabel('Día del mes')
 ax.set_ylabel('Número de filas')
 ax.set_title(f'Número de filas por día en {selected_month} para {selected_name}')
