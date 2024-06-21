@@ -90,6 +90,7 @@ st.write(filtered_data)
 # -------------------------------
 # Tercero gráfico de barras
 # -------------------------------
+st.text('REPORTE DE RESERVAS CANCELADAS')
 # Campo de selección para elegir un mes
 selected_month1 = st.selectbox('Selecciona un mes para reservas canceladas:', list(months.keys()), key='month_select_2')
 # Campo de selección para elegir una discoteca
@@ -105,7 +106,7 @@ daily_counts_cancelled = filtered_data_cancelled['fechaHora'].dt.day.value_count
 fig, ax = plt.subplots()
 ax.bar(daily_counts_cancelled.index, daily_counts_cancelled.values)
 ax.set_xlabel('Día del mes')
-ax.set_ylabel('Número de filas canceladas')
+ax.set_ylabel('Número de reservas canceladas')
 ax.set_title(f'Número de reservas canceladas por día en {selected_month1} para {selected_name1}')
 # Muestra el gráfico de barras
 st.pyplot(fig)
@@ -114,25 +115,26 @@ st.write(filtered_data_cancelled)
 
 
 # -------------------------------
-# Cuarto gráfico de barras
+# Cuarto gráfico de histogramas
 # -------------------------------
+st.text('REPORTE DE FECHAS RESERVADAS')
 # Campo de selección para elegir un mes
-selected_month2 = st.selectbox('Selecciona un mes para reservas canceladas:', list(months.keys()), key='month_select_3')
+selected_month2 = st.selectbox('Selecciona un mes para fechas reservadas:', list(months.keys()), key='month_select_3')
 # Campo de selección para elegir una discoteca
-selected_name2 = st.selectbox('Selecciona la discoteca para reservas canceladas:', names, key='name_select_3')
-# Filtra los registros que coinciden con el mes, nombre seleccionados y estado "Cancelado"
+selected_name2 = st.selectbox('Selecciona la discoteca:', names, key='name_select_3')
+# Filtra los registros que coinciden con el mes y nombre seleccionados
 month_num2 = months[selected_month2]
 filtered_data_reserved = df[(df['fecha'].dt.month == month_num2) & 
                              (df['discoteca'] == selected_name2)]
-# Cuenta el número de filas para cada día del mes
-daily_counts_reserved = filtered_data_reserved['fecha'].dt.day.value_counts().sort_index()
-# Crea un gráfico de barras usando Matplotlib
+# Extrae los días del mes de las fechas filtradas
+days_reserved = filtered_data_reserved['fecha'].dt.day
+# Crea un histograma usando Matplotlib
 fig, ax = plt.subplots()
-ax.bar(daily_counts_reserved.index, daily_counts_reserved.values)
+ax.hist(days_reserved, bins=range(1, 32), edgecolor='black')
 ax.set_xlabel('Día del mes')
-ax.set_ylabel('Número de reservas para el dia')
-ax.set_title(f'Número de reservas por día en {selected_month2} para el dia {selected_name2}')
-# Muestra el gráfico de barras
+ax.set_ylabel('Número de reservas para el día')
+ax.set_title(f'Número de fechas reservadas por día en {selected_month2} para {selected_name2}')
+# Muestra el histograma
 st.pyplot(fig)
 # Muestra el DataFrame filtrado (opcional)
 st.write(filtered_data_reserved)
