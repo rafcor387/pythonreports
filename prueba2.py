@@ -58,18 +58,14 @@ months = {
     'Septiembre': 9, 'Octubre': 10, 'Noviembre': 11, 'Diciembre': 12
 }
 selected_month = st.selectbox('Selecciona un mes:', list(months.keys()), key='month_select_1')
-
 # Campo de selección para elegir un nombre
 names = df['discoteca'].unique()
 selected_name = st.selectbox('Selecciona la discoteca:', names, key='name_select_1')
-
 # Filtra los registros que coinciden con el mes y el nombre seleccionados
 month_num = months[selected_month]
 filtered_data = df[(df['fechaHora'].dt.month == month_num) & (df['discoteca'] == selected_name)]
-
 # Cuenta el número de filas para cada día del mes
 daily_counts = filtered_data['fechaHora'].dt.day.value_counts().sort_index()
-
 # Crea un gráfico de líneas usando Matplotlib
 fig, ax = plt.subplots()
 #ax.plot(daily_counts.index, daily_counts.values, marker='o')
@@ -82,24 +78,21 @@ st.pyplot(fig)
 # Muestra el DataFrame filtrado (opcional)
 st.write(filtered_data)
 
+
 # -------------------------------
 # Segundo gráfico de barras
 # -------------------------------
 # Campo de selección para elegir un mes
 selected_month1 = st.selectbox('Selecciona un mes para reservas canceladas:', list(months.keys()), key='month_select_2')
-
 # Campo de selección para elegir una discoteca
 selected_name1 = st.selectbox('Selecciona la discoteca para reservas canceladas:', names, key='name_select_2')
-
 # Filtra los registros que coinciden con el mes, nombre seleccionados y estado "Cancelado"
 month_num1 = months[selected_month1]
 filtered_data_cancelled = df[(df['fechaHora'].dt.month == month_num1) & 
                              (df['discoteca'] == selected_name1) & 
                              (df['estado'] == 'Cancelado')]
-
 # Cuenta el número de filas para cada día del mes
 daily_counts_cancelled = filtered_data_cancelled['fechaHora'].dt.day.value_counts().sort_index()
-
 # Crea un gráfico de barras usando Matplotlib
 fig, ax = plt.subplots()
 ax.bar(daily_counts_cancelled.index, daily_counts_cancelled.values)
@@ -110,3 +103,28 @@ ax.set_title(f'Número de reservas canceladas por día en {selected_month1} para
 st.pyplot(fig)
 # Muestra el DataFrame filtrado (opcional)
 st.write(filtered_data_cancelled)
+
+
+# -------------------------------
+# Tercer gráfico de barras
+# -------------------------------
+# Campo de selección para elegir un mes
+selected_month2 = st.selectbox('Selecciona un mes para reservas canceladas:', list(months.keys()), key='month_select_2')
+# Campo de selección para elegir una discoteca
+selected_name2 = st.selectbox('Selecciona la discoteca para reservas canceladas:', names, key='name_select_2')
+# Filtra los registros que coinciden con el mes, nombre seleccionados y estado "Cancelado"
+month_num2 = months[selected_month2]
+filtered_data_reserved = df[(df['fecha'].dt.month == month_num2) & 
+                             (df['discoteca'] == selected_name2)]
+# Cuenta el número de filas para cada día del mes
+daily_counts_reserved = filtered_data_reserved['fecha'].dt.day.value_counts().sort_index()
+# Crea un gráfico de barras usando Matplotlib
+fig, ax = plt.subplots()
+ax.bar(daily_counts_reserved.index, daily_counts_reserved.values)
+ax.set_xlabel('Día del mes')
+ax.set_ylabel('Número de reservas para el dia')
+ax.set_title(f'Número de reservas por día en {selected_month2} para el dia {selected_name2}')
+# Muestra el gráfico de barras
+st.pyplot(fig)
+# Muestra el DataFrame filtrado (opcional)
+st.write(filtered_data_reserved)
