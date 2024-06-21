@@ -61,12 +61,12 @@ months = {
 selected_month = st.selectbox('Selecciona un mes:', list(months.keys()))
 
 # Campo de selección para elegir un nombre
-names = df['nombre'].unique()
-selected_name = st.selectbox('Selecciona un nombre:', names)
+names = df['discoteca'].unique()
+selected_name = st.selectbox('Selecciona la discoteca:', names)
 
 # Filtra los registros que coinciden con el mes y el nombre seleccionados
 month_num = months[selected_month]
-filtered_data = df[(df['fechaHora'].dt.month == month_num) & (df['nombre'] == selected_name)]
+filtered_data = df[(df['fechaHora'].dt.month == month_num) & (df['discoteca'] == selected_name)]
 
 # Cuenta el número de filas para cada día del mes
 daily_counts = filtered_data['fechaHora'].dt.day.value_counts().sort_index()
