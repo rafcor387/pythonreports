@@ -20,28 +20,29 @@ df.loc[df['cliente'] == option]
 
 
 #pa fecha 
+# Convierte la columna 'fechaHora' al tipo de dato de fecha y hora
+df['fechaHora'] = pd.to_datetime(df['fechaHora'])
 # Establece la fecha por defecto
 default_date = datetime(2023, 1, 1)
 # Campo de texto para filtrar por fecha con fecha por defecto
 date_input = st.date_input('Selecciona una fecha:', default_date)
-
-# Convierte la columna 'fechaHora' al tipo de dato de fecha y hora
-df['fechaHora'] = pd.to_datetime(df['fechaHora'])
-
 # Filtra los registros que coinciden con la fecha seleccionada
 filtered_data = df[df['fechaHora'].dt.date == date_input]
-
 # Calcula el total de registros para cada nombre
 nombre_counts = filtered_data['nombre'].value_counts()
-
 # Crea un gráfico de pastel usando Matplotlib
 fig, ax = plt.subplots()
-ax.pie(nombre_counts, labels=nombre_counts.index, autopct='%1.1f%%', startangle=90)
+wedges, texts, autotexts = ax.pie(
+    nombre_counts, labels=nombre_counts.index, autopct='%1.1f%%', startangle=90)
+# Configura la leyenda
+ax.legend(
+    wedges, [f'{name}: {count} filas' for name, count in nombre_counts.items()],
+    title='Nombres', loc='center left', bbox_to_anchor=(1, 0, 0.5, 1))
 ax.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
-ax.set_title(f'Distribución de nombres para todas las ubicaciones en la fecha seleccionada')
-
+ax.set_title(f'Distribución de nombres para la fecha seleccionada: {date_input}')
 # Muestra el gráfico de pastel
 st.pyplot(fig)
-
+# Muestra el número total de filas
+st.write(f'Total de filas para la fecha {date_input}: {len(filtered_data)}')
 # Campo de selección para elegir entre Forum, Pacha, Zouk Boulevard
 #selected_location = st.selectbox('Selecciona una ubicación:', ['Forum', 'Pacha', 'Zouk Boulevard'])
