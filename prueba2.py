@@ -48,8 +48,6 @@ st.write(f'Total de reservas para la fecha {date_input}: {len(filtered_data)}')
 
 
 
-
-
 # -------------------------------
 # Primer gráfico de líneas
 # -------------------------------
@@ -84,7 +82,7 @@ st.pyplot(fig)
 st.write(filtered_data)
 
 # -------------------------------
-# Segundo gráfico de líneas
+# Segundo gráfico de barras
 # -------------------------------
 # Campo de selección para elegir un mes
 selected_month1 = st.selectbox('Selecciona un mes para reservas canceladas:', list(months.keys()), key='month_select_2')
@@ -101,13 +99,13 @@ filtered_data_cancelled = df[(df['fechaHora'].dt.month == month_num1) &
 # Cuenta el número de filas para cada día del mes
 daily_counts_cancelled = filtered_data_cancelled['fechaHora'].dt.day.value_counts().sort_index()
 
-# Crea un gráfico de líneas usando Matplotlib
+# Crea un gráfico de barras usando Matplotlib
 fig, ax = plt.subplots()
-ax.bar(daily_counts_cancelled.index, daily_counts_cancelled.values, marker='o')
+ax.bar(daily_counts_cancelled.index, daily_counts_cancelled.values)
 ax.set_xlabel('Día del mes')
 ax.set_ylabel('Número de filas canceladas')
 ax.set_title(f'Número de reservas canceladas por día en {selected_month1} para {selected_name1}')
-# Muestra el gráfico de líneas
+# Muestra el gráfico de barras
 st.pyplot(fig)
 # Muestra el DataFrame filtrado (opcional)
 st.write(filtered_data_cancelled)
