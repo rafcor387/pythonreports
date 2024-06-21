@@ -29,17 +29,15 @@ date_input = st.date_input('Selecciona una fecha:', default_date)
 # Filtra los registros que coinciden con la fecha seleccionada
 filtered_data = df[df['fechaHora'].dt.date == date_input]
 # Calcula el total de registros para cada nombre
-nombre_counts = filtered_data['nombre'].value_counts()
-# Crea un gráfico de pastel usando Matplotlib
+nombre_counts = filtered_data['discoteca'].value_counts()
 fig, ax = plt.subplots()
 wedges, texts, autotexts = ax.pie(
     nombre_counts, labels=nombre_counts.index, autopct='%1.1f%%', startangle=90)
-# Configura la leyenda
 ax.legend(
     wedges, [f'{name}: {count} reservas' for name, count in nombre_counts.items()],
     title='Discotecas', loc='center left', bbox_to_anchor=(1, 0, 0.5, 1))
 ax.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
-ax.set_title(f'Distribución de discotecas para la fecha seleccionada: {date_input}')
+ax.set_title(f'Distribución de reservas realizadas por fecha seleccionada: {date_input}')
 # Muestra el gráfico de pastel
 st.pyplot(fig)
 # Muestra el número total de filas
