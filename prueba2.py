@@ -59,14 +59,50 @@ months = {
     'Septiembre': 9, 'Octubre': 10, 'Noviembre': 11, 'Diciembre': 12
 }
 selected_month = st.selectbox('Selecciona un mes:', list(months.keys()))
-
 # Campo de selección para elegir un nombre
 names = df['discoteca'].unique()
 selected_name = st.selectbox('Selecciona la discoteca:', names)
-
 # Filtra los registros que coinciden con el mes y el nombre seleccionados
 month_num = months[selected_month]
 filtered_data = df[(df['fechaHora'].dt.month == month_num) & (df['discoteca'] == selected_name)]
+# Cuenta el número de filas para cada día del mes
+daily_counts = filtered_data['fechaHora'].dt.day.value_counts().sort_index()
+# Crea un gráfico de líneas usando Matplotlib
+fig, ax = plt.subplots()
+ax.plot(daily_counts.index, daily_counts.values, marker='o')
+ax.set_xlabel('Día del mes')
+ax.set_ylabel('Número de filas')
+ax.set_title(f'Número de filas por día en {selected_month} para {selected_name}')
+# Muestra el gráfico de líneas
+st.pyplot(fig)
+# Muestra el DataFrame filtrado (opcional)
+st.write(filtered_data)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+selected_month = st.selectbox('Selecciona un mes:', list(months.keys()))
+
+# Campo de selección para elegir una discoteca
+names = df['nombre'].unique()
+selected_name = st.selectbox('Selecciona la discoteca:', names)
+
+# Filtra los registros que coinciden con el mes, nombre seleccionados y estado "Cancelado"
+month_num = months[selected_month]
+filtered_data = df[(df['fechaHora'].dt.month == month_num) & 
+                   (df['nombre'] == selected_name) & 
+                   (df['estado'] == 'Cancelado')]
 
 # Cuenta el número de filas para cada día del mes
 daily_counts = filtered_data['fechaHora'].dt.day.value_counts().sort_index()
@@ -75,8 +111,8 @@ daily_counts = filtered_data['fechaHora'].dt.day.value_counts().sort_index()
 fig, ax = plt.subplots()
 ax.plot(daily_counts.index, daily_counts.values, marker='o')
 ax.set_xlabel('Día del mes')
-ax.set_ylabel('Número de filas')
-ax.set_title(f'Número de filas por día en {selected_month} para {selected_name}')
+ax.set_ylabel('Número de filas canceladas')
+ax.set_title(f'Número de reservas canceladas por día en {selected_month} para {selected_name}')
 
 # Muestra el gráfico de líneas
 st.pyplot(fig)
