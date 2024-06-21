@@ -12,9 +12,7 @@ if st.checkbox('Mostrar dataframe'):
     st.write(df)
 
 
-option = st.selectbox(
-'Selecciona el cliente: ',
-df['cliente'])
+option = st.selectbox('Selecciona el cliente: ',df['cliente'])
 df.loc[df['cliente'] == option]
 
 
