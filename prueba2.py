@@ -23,7 +23,7 @@ df.loc[df['cliente'] == option]
 # Convierte la columna 'fechaHora' al tipo de dato de fecha y hora
 df['fechaHora'] = pd.to_datetime(df['fechaHora'])
 # Convierte la columna 'fecha' al tipo de dato de fecha
-df['fecha'] = pd.to_date(df['fecha'])
+df['fecha'] = pd.to_datetime(df['fecha'])
 
 #pa fecha 
 # Establece la fecha por defecto
