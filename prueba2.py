@@ -15,9 +15,6 @@ if st.checkbox('Mostrar dataframe'):
 option = st.selectbox(
 'Selecciona el cliente: ',
 df['cliente'])
-'Tu selección: ', option
-df.loc[df['cliente'] == option]
-
 
 
 # Convierte la columna 'fechaHora' al tipo de dato de fecha y hora
@@ -84,7 +81,8 @@ ax.set_title(f'Número de reservas realizadas por dia en {selected_month} para {
 # Muestra el gráfico de líneas
 st.pyplot(fig)
 # Muestra el DataFrame filtrado (opcional)
-st.write(filtered_data)
+if st.checkbox('Mostrar dataframe'):
+    st.write(filtered_data)
 
 
 # -------------------------------
