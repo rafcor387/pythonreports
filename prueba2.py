@@ -25,7 +25,10 @@ df['fechaHora'] = pd.to_datetime(df['fechaHora'])
 # Convierte la columna 'fecha' al tipo de dato de fecha
 df['fecha'] = pd.to_datetime(df['fecha'])
 
-#pa fecha 
+# -------------------------------
+# Primer gráfico de pie
+# -------------------------------
+st.text('reporte de pie')
 # Establece la fecha por defecto
 default_date = datetime(2023, 1, 1)
 # Campo de texto para filtrar por fecha con fecha por defecto
@@ -53,7 +56,7 @@ st.write(f'Total de reservas para la fecha {date_input}: {len(filtered_data)}')
 
 
 # -------------------------------
-# Primer gráfico de líneas
+# Segundo gráfico de líneas
 # -------------------------------
 # Campo de selección para elegir un mes
 months = {
@@ -84,7 +87,7 @@ st.write(filtered_data)
 
 
 # -------------------------------
-# Segundo gráfico de barras
+# Tercero gráfico de barras
 # -------------------------------
 # Campo de selección para elegir un mes
 selected_month1 = st.selectbox('Selecciona un mes para reservas canceladas:', list(months.keys()), key='month_select_2')
@@ -110,7 +113,7 @@ st.write(filtered_data_cancelled)
 
 
 # -------------------------------
-# Tercer gráfico de barras
+# Cuarto gráfico de barras
 # -------------------------------
 # Campo de selección para elegir un mes
 selected_month2 = st.selectbox('Selecciona un mes para reservas canceladas:', list(months.keys()), key='month_select_3')
