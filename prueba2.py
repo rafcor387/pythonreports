@@ -19,9 +19,13 @@ df['cliente'])
 df.loc[df['cliente'] == option]
 
 
-#pa fecha 
+
 # Convierte la columna 'fechaHora' al tipo de dato de fecha y hora
 df['fechaHora'] = pd.to_datetime(df['fechaHora'])
+# Convierte la columna 'fecha' al tipo de dato de fecha
+df['fecha'] = pd.to_date(df['fecha'])
+
+#pa fecha 
 # Establece la fecha por defecto
 default_date = datetime(2023, 1, 1)
 # Campo de texto para filtrar por fecha con fecha por defecto
