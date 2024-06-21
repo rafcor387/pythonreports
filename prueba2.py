@@ -28,7 +28,7 @@ df['fecha'] = pd.to_datetime(df['fecha'])
 # -------------------------------
 # Primer gráfico de pie
 # -------------------------------
-st.text('reporte de pie')
+st.text('REPORTE DE RESERVAS REALIZADAS EN UNA FECHA')
 # Establece la fecha por defecto
 default_date = datetime(2023, 1, 1)
 # Campo de texto para filtrar por fecha con fecha por defecto
@@ -58,6 +58,7 @@ st.write(f'Total de reservas para la fecha {date_input}: {len(filtered_data)}')
 # -------------------------------
 # Segundo gráfico de líneas
 # -------------------------------
+st.text('REPORTE DE RESERVAS REALIZADAS EN UNA FECHA')
 # Campo de selección para elegir un mes
 months = {
     'Enero': 1, 'Febrero': 2, 'Marzo': 3, 'Abril': 4,
@@ -76,7 +77,7 @@ daily_counts = filtered_data['fechaHora'].dt.day.value_counts().sort_index()
 # Crea un gráfico de líneas usando Matplotlib
 fig, ax = plt.subplots()
 #ax.plot(daily_counts.index, daily_counts.values, marker='o')
-ax.bar(daily_counts.index, daily_counts.values)
+ax.plot(daily_counts.index, daily_counts.values)
 ax.set_xlabel('Día del mes')
 ax.set_ylabel('Número de filas')
 ax.set_title(f'Número de filas por día en {selected_month} para {selected_name}')
