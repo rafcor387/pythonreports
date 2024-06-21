@@ -91,8 +91,12 @@ st.write(filtered_data)
 
 
 
-
-selected_month1 = st.selectbox('Selecciona un mes:', list(months.keys()))
+months1 = {
+    'Enero': 1, 'Febrero': 2, 'Marzo': 3, 'Abril': 4,
+    'Mayo': 5, 'Junio': 6, 'Julio': 7, 'Agosto': 8,
+    'Septiembre': 9, 'Octubre': 10, 'Noviembre': 11, 'Diciembre': 12
+}
+selected_month1 = st.selectbox('Selecciona un mes:', list(months1.keys()))
 
 # Campo de selección para elegir una discoteca
 names = df['discoteca'].unique()
