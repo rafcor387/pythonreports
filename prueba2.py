@@ -72,7 +72,7 @@ daily_counts = filtered_data['fechaHora'].dt.day.value_counts().sort_index()
 
 # Crea un gráfico de líneas usando Matplotlib
 fig, ax = plt.subplots()
-ax.plot(daily_counts.index, daily_counts.values, marker='o')
+ax.bar(daily_counts.index, daily_counts.values, marker='o')
 ax.set_xlabel('Día del mes')
 ax.set_ylabel('Número de filas')
 ax.set_title(f'Número de filas por día en {selected_month} para {selected_name}')
@@ -101,7 +101,7 @@ daily_counts_cancelled = filtered_data_cancelled['fechaHora'].dt.day.value_count
 
 # Crea un gráfico de barras usando Matplotlib
 fig, ax = plt.subplots()
-ax.plot(daily_counts_cancelled.index, daily_counts_cancelled.values)
+ax.bar(daily_counts_cancelled.index, daily_counts_cancelled.values)
 ax.set_xlabel('Día del mes')
 ax.set_ylabel('Número de filas canceladas')
 ax.set_title(f'Número de reservas canceladas por día en {selected_month1} para {selected_name1}')
