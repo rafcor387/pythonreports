@@ -95,13 +95,13 @@ st.write(filtered_data)
 selected_month = st.selectbox('Selecciona un mes:', list(months.keys()))
 
 # Campo de selección para elegir una discoteca
-names = df['nombre'].unique()
+names = df['discoteca'].unique()
 selected_name = st.selectbox('Selecciona la discoteca:', names)
 
 # Filtra los registros que coinciden con el mes, nombre seleccionados y estado "Cancelado"
 month_num = months[selected_month]
 filtered_data = df[(df['fechaHora'].dt.month == month_num) & 
-                   (df['nombre'] == selected_name) & 
+                   (df['discoteca'] == selected_name) & 
                    (df['estado'] == 'Cancelado')]
 
 # Cuenta el número de filas para cada día del mes
