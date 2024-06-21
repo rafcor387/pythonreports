@@ -109,9 +109,9 @@ st.write(filtered_data_cancelled)
 # Tercer gráfico de barras
 # -------------------------------
 # Campo de selección para elegir un mes
-selected_month2 = st.selectbox('Selecciona un mes para reservas canceladas:', list(months.keys()), key='month_select_2')
+selected_month2 = st.selectbox('Selecciona un mes para reservas canceladas:', list(months.keys()), key='month_select_3')
 # Campo de selección para elegir una discoteca
-selected_name2 = st.selectbox('Selecciona la discoteca para reservas canceladas:', names, key='name_select_2')
+selected_name2 = st.selectbox('Selecciona la discoteca para reservas canceladas:', names, key='name_select_3')
 # Filtra los registros que coinciden con el mes, nombre seleccionados y estado "Cancelado"
 month_num2 = months[selected_month2]
 filtered_data_reserved = df[(df['fecha'].dt.month == month_num2) & 
