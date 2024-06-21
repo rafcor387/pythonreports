@@ -15,6 +15,8 @@ if st.checkbox('Mostrar dataframe'):
 option = st.selectbox(
 'Selecciona el cliente: ',
 df['cliente'])
+df.loc[df['cliente'] == option]
+
 
 
 # Convierte la columna 'fechaHora' al tipo de dato de fecha y hora
