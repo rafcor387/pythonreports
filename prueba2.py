@@ -92,16 +92,16 @@ st.write(filtered_data)
 
 
 
-selected_month = st.selectbox('Selecciona un mes:', list(months.keys()))
+selected_month1 = st.selectbox('Selecciona un mes:', list(months.keys()))
 
 # Campo de selección para elegir una discoteca
 names = df['discoteca'].unique()
-selected_name = st.selectbox('Selecciona la discoteca:', names)
+selected_name1 = st.selectbox('Selecciona la discoteca:', names)
 
 # Filtra los registros que coinciden con el mes, nombre seleccionados y estado "Cancelado"
-month_num = months[selected_month]
+month_num = months[selected_month1]
 filtered_data = df[(df['fechaHora'].dt.month == month_num) & 
-                   (df['discoteca'] == selected_name) & 
+                   (df['discoteca'] == selected_name1) & 
                    (df['estado'] == 'Cancelado')]
 
 # Cuenta el número de filas para cada día del mes
@@ -112,7 +112,7 @@ fig, ax = plt.subplots()
 ax.plot(daily_counts.index, daily_counts.values, marker='o')
 ax.set_xlabel('Día del mes')
 ax.set_ylabel('Número de filas canceladas')
-ax.set_title(f'Número de reservas canceladas por día en {selected_month} para {selected_name}')
+ax.set_title(f'Número de reservas canceladas por día en {selected_month1} para {selected_name1}')
 
 # Muestra el gráfico de líneas
 st.pyplot(fig)
