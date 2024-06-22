@@ -94,7 +94,7 @@ if st.checkbox('Mostrar dataframe de reservas realizadas en una fecha'):
 selected_month5 = st.selectbox('Selecciona un mes:', list(months.keys()), key='month_select_6')
 # Filtra los registros que coinciden con el mes seleccionado
 month_num5 = months[selected_month5]
-filtered_data5 = df[df['fechaHora'].dt.month == month_num5]
+filtered_data5 = df[df['fecha'].dt.month == month_num5]
 # Crear un boxplot de las reservas diarias por discoteca para el mes seleccionado
 fig, ax = plt.subplots(figsize=(10, 6))
 sns.boxplot(data=filtered_data5, x='discoteca', y='idMesa', ax=ax)
