@@ -19,6 +19,12 @@ months = {
     'Mayo': 5, 'Junio': 6, 'Julio': 7, 'Agosto': 8,
     'Septiembre': 9, 'Octubre': 10, 'Noviembre': 11, 'Diciembre': 12
 }
+months2 = {
+    1: 'Enero', 2: 'Febrero', 3: 'Marzo', 4: 'Abril',
+    5 :'Mayo', 6 :'Junio' ,  7: 'Julio',  8: 'Agosto',
+     9 :'Septiembre',  10 :'Octubre',  11 : 'Noviembre',  12:'Diciembre'
+}
+
 
 # -------------------------------
 # mostrar el dataframe completo
@@ -41,7 +47,7 @@ daily_counts45 = filtered_data76['fechaHora'].dt.month.value_counts().sort_index
 # Crea un gráfico de líneas usando Matplotlib
 fig, ax = plt.subplots()
 #ax.plot(daily_counts.index, daily_counts.values, marker='o')
-ax.plot(daily_counts45.index, daily_counts45.values)
+ax.plot(months2[daily_counts45.index], daily_counts45.values)
 ax.set_xlabel('mes')
 ax.set_ylabel('Número de reservas')
 ax.set_title(f'Número de reservas realizadas por meses en {selected_name44} para {option}')
