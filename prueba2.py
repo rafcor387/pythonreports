@@ -80,6 +80,8 @@ ax.set_ylabel('Número de reservas')
 ax.set_title(f'Número de reservas realizadas por dia en {selected_month} para {selected_name}')
 # Muestra el gráfico de líneas
 st.pyplot(fig)
+if st.checkbox('Mostrar dataframe'):
+    st.write(filtered_data)
 
 
 
