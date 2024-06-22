@@ -97,7 +97,7 @@ st.write(f'Total de reservas para la fecha {date_input}: {len(filtered_data)}')
 # Segundo gráfico de líneas
 # -------------------------------
 st.text('REPORTE DE RESERVAS REALIZADAS EN UNA FECHA')
-selected_month = st.selectbox('Selecciona un mes:', list(months.keys()), key='month_select_1')
+selected_month = st.selectbox('Selecciona un mes:', list(months.keys()), key='month_select_145')
 # Campo de selección para elegir un nombre
 names = df['discoteca'].unique()
 selected_name = st.selectbox('Selecciona la discoteca:', names, key='name_select_1')
