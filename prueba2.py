@@ -43,7 +43,7 @@ daily_counts45 = filtered_data76['fechaHora'].dt.month.value_counts().sort_index
 max_value = daily_counts45.max()
 # Reindexar para asegurar que todos los meses estén presentes
 months = np.arange(1, 13)  # Array con los números de los meses (1-12)
-reser = np.arange(1,max_value)
+reser = np.arange(1,max_value+1)
 daily_counts45 = daily_counts45.reindex(months, fill_value=0)
 
 # Crear un gráfico de barras usando Matplotlib
