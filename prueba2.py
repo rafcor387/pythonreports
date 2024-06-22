@@ -54,8 +54,12 @@ def create_pdf():
     from reportlab.lib.pagesizes import letter
     from reportlab.pdfgen import canvas
     import os
+    from io import BytesIO
+
     # Crear el documento PDF
-    c = canvas.Canvas("report.pdf", pagesize=letter)
+    buffer = BytesIO()
+    c = canvas.Canvas(buffer, pagesize=letter)
+
     # Título
     c.setFont("Helvetica-Bold", 16)
     c.drawString(100, 750, "Reporte de Reservas de Clientes")
@@ -74,6 +78,9 @@ def create_pdf():
     # Eliminar la imagen temporal después de usarla
     os.remove("temp_plot.png")
     c.save()
+    
+    buffer.seek(0)
+    return buffer
 # Botón para generar el PDF
 if st.button("Generar PDF"):
     pdf_buffer = create_pdf()
