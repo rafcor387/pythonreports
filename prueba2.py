@@ -91,7 +91,32 @@ if st.checkbox('Mostrar dataframe de reservas realizadas en una fecha'):
 
 
 
+#clientes por nummesa
+# Obtener los nombres únicos de los clientes, meses y discotecas
+clientes = df['cliente'].unique()
+meses = df['fecha'].dt.month_name().unique()
+discotecas = df['discoteca'].unique()
 
+# Selección de usuario
+selected_cliente = st.selectbox('Selecciona un cliente:', clientes)
+selected_mes = st.selectbox('Selecciona un mes:', meses)
+selected_discoteca = st.selectbox('Selecciona una discoteca:', discotecas)
+
+# Filtrar los datos según las selecciones del usuario
+filtered_data = df[(df['cliente'] == selected_cliente) & 
+                   (df['fecha'].dt.month_name() == selected_mes) & 
+                   (df['discoteca'] == selected_discoteca)]
+
+# Contar el número de filas para cada valor único de numMesa
+bar_data = filtered_data['numMesa'].value_counts().sort_index()
+
+# Crear el gráfico de barras
+plt.figure(figsize=(10, 6))
+sns.barplot(x=bar_data.index, y=bar_data.values)
+plt.title('Número de Reservas por Número de Mesa')
+plt.xlabel('Número de Mesa')
+plt.ylabel('Número de Reservas')
+plt.show()
 
 
 #violin
