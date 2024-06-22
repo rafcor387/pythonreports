@@ -34,7 +34,7 @@ if st.checkbox('Mostrar dataframe'):
 # -------------------------------
 # Primer grafico de reservas de un cliente en una discoteca por meses
 # -------------------------------
-st.text('1.INFORMACION SOBRE CLIENTE')
+st.text('1. RESERVAS DE CLIENTES EN UNA DISCOTECA POR MESES')
 option = st.selectbox('Selecciona el cliente:', df['cliente'].unique())
 selected_name44 = st.selectbox('Selecciona la discoteca:', df['discoteca'].unique())
 
