@@ -15,12 +15,12 @@ df['fechaHora'] = pd.to_datetime(df['fechaHora'])
 # Convierte la columna 'fecha' al tipo de dato de fecha
 df['fecha'] = pd.to_datetime(df['fecha'])
 # Campo de selección para elegir un mes
+
 months = {
     'Enero': 1, 'Febrero': 2, 'Marzo': 3, 'Abril': 4,
     'Mayo': 5, 'Junio': 6, 'Julio': 7, 'Agosto': 8,
     'Septiembre': 9, 'Octubre': 10, 'Noviembre': 11, 'Diciembre': 12
 }
-
 
 
 # -------------------------------
@@ -42,14 +42,14 @@ filtered_data76 = df[(df['cliente'] == option) & (df['discoteca'] == selected_na
 daily_counts45 = filtered_data76['fechaHora'].dt.month.value_counts().sort_index()
 max_value = daily_counts45.max()
 # Reindexar para asegurar que todos los meses estén presentes
-months = np.arange(1, 13)  # Array con los números de los meses (1-12)
+month = np.arange(1, 13)  # Array con los números de los meses (1-12)
 reser = np.arange(1,max_value+1)
-daily_counts45 = daily_counts45.reindex(months, fill_value=0)
+daily_counts45 = daily_counts45.reindex(month, fill_value=0)
 
 # Crear un gráfico de barras usando Matplotlib
 fig, ax = plt.subplots()
 ax.bar(daily_counts45.index, daily_counts45.values)
-ax.set_xticks(months)  # Asegurar que todos los meses se muestren en el eje x
+ax.set_xticks(month)  # Asegurar que todos los meses se muestren en el eje x
 ax.set_yticks(reser)  # Asegurar que todos los meses se muestren en el eje y
 ax.set_xlabel('Mes')
 ax.set_ylabel('Número de reservas')
