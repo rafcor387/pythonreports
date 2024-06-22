@@ -84,3 +84,15 @@ def create_pdf():
     
     buffer.seek(0)
     return buffer
+
+# Botón para generar el PDF
+if st.button("Generar PDF"):
+    pdf_buffer = create_pdf()
+    st.success("PDF generado con éxito!")
+    # Guardar el PDF en un archivo temporal
+    temp_file = tempfile.NamedTemporaryFile(delete=False, suffix=".pdf")
+    temp_file.write(pdf_buffer.getvalue())
+    temp_file.close()
+    
+    # Abrir el PDF en una nueva ventana del navegador
+    webbrowser.open_new_tab(temp_file.name)
