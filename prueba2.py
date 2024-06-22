@@ -18,7 +18,7 @@ if st.checkbox('Mostrar dataframe'):
 st.text('INFORMACION SOBRE CLIENTE')
 option = st.selectbox('Selecciona el cliente: ',df['cliente'])
 #Campo de selección para elegir un nombre
-selected_name = st.selectbox('Selecciona la discoteca:', df['discoteca'])
+selected_name = st.selectbox('Selecciona la discoteca:', df['discoteca'].unique)
 df.loc[df['cliente'] == option]
 
 
