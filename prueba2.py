@@ -47,7 +47,7 @@ daily_counts45 = daily_counts45.reindex(months, fill_value=0)
 
 # Crear un gráfico de líneas usando Matplotlib
 fig, ax = plt.subplots()
-ax.plot(daily_counts45.index, daily_counts45.values, marker='o')
+ax.bar(daily_counts45.index, daily_counts45.values, marker='o')
 ax.set_xticks(months)  # Asegurar que todos los meses se muestren en el eje x
 ax.set_xlabel('Mes')
 ax.set_ylabel('Número de reservas')
