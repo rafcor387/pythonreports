@@ -90,6 +90,42 @@ if st.checkbox('Mostrar dataframe de reservas realizadas en una fecha'):
 
 
 
+
+
+
+
+#violin
+selected_month9 = st.selectbox('Selecciona un mes:', list(months.keys()), key='month_select_9')
+
+# Filtra los registros que coinciden con el mes seleccionado
+month_num9 = months[selected_month9]
+filtered_data9 = df[df['fecha'].dt.month == month_num9]
+
+# Crear un gráfico de violín del número de reservas por discoteca
+fig, ax = plt.subplots(figsize=(10, 6))
+sns.violinplot(data=filtered_data9, x='discoteca', y='idMesa', ax=ax)
+ax.set_title(f'Distribución de reservas por discoteca en {selected_month9}')
+ax.set_xlabel('Discoteca')
+ax.set_ylabel('Número de reservas (idMesa)')
+
+# Mostrar el gráfico de violín en Streamlit
+st.pyplot(fig)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #boxplot
 selected_month5 = st.selectbox('Selecciona un mes:', list(months.keys()), key='month_select_6')
 # Filtra los registros que coinciden con el mes seleccionado
