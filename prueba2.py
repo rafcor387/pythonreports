@@ -91,18 +91,33 @@ if st.checkbox('Mostrar dataframe de reservas realizadas en una fecha'):
 
 
 
-# Crear una tabla de frecuencia para el heatmap
-heatmap_data = filtered_data0['numMesa'].value_counts().sort_index().reset_index().rename(columns={'index': 'Número de Mesa', 'numMesa': 'Número de reservas'})
+#clientes por nummesa
+# Obtener los nombres únicos de los clientes, meses y discotecas
+clientes = df['cliente'].unique()
+meses = df['fecha'].dt.month_name().unique()
+discotecas = df['discoteca'].unique()
+# Selección de usuario
+selected_cliente = st.selectbox('Selecciona un cliente:', clientes)
+selected_mes = st.selectbox('Selecciona un mes:', meses)
+selected_discoteca = st.selectbox('Selecciona una discoteca:', discotecas)
 
-# Crear el heatmap
-plt.figure(figsize=(10, 6))
-heatmap = sns.heatmap(heatmap_data.set_index('Número de Mesa'), annot=True, fmt="d", cmap='YlGnBu')
-heatmap.set_title(f'Número de reservas para el cliente {selected_cliente}, mes {selected_mes} en {selected_discoteca}')
-heatmap.set_xlabel('Número de Mesa')
-heatmap.set_ylabel('Número de veces que se encontró esa Número de Mesa')
+# Filtrar los datos según las selecciones del usuario
+filtered_data0 = df[(df['cliente'] == selected_cliente) & 
+                   (df['fecha'].dt.month_name() == selected_mes) & 
+                   (df['discoteca'] == selected_discoteca)]
 
-# Mostrar el heatmap
-st.pyplot()
+# Contar el número de filas para cada valor único de numMesa
+bar_data = filtered_data0['numMesa'].value_counts().sort_index()
+
+# Crear el gráfico de barras
+# Crear un gráfico de barras usando Matplotlib
+fig, ax = plt.subplots()
+ax.scatter(bar_data.index, bar_data.values)  # Usamos bar_data en lugar de daily_counts
+ax.set_xlabel('Número de Mesa')  # Cambiamos el texto del eje x
+ax.set_ylabel('Número de reservas')  # Cambiamos el texto del eje y
+ax.set_title(f'Número de reservas para el cliente {selected_cliente}, mes {selected_mes} en {selected_discoteca}')  # Ajustamos el título
+# Muestra el gráfico de barras
+st.pyplot(fig)
 
 #violin
 selected_month9 = st.selectbox('Selecciona un mes:', list(months.keys()), key='month_select_9')
