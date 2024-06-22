@@ -54,11 +54,9 @@ ax.set_ylabel('Número de reservas')
 ax.set_title(f'Número de reservas realizadas por meses en {selected_name44} para {cliente7}')
 # Mostrar el gráfico de barras
 st.pyplot(fig)
-st.write(filtered_data76)
 # Muestra el DataFrame filtrado (opcional)
 if st.checkbox(f'Mostrar dataframe de reservas de {cliente7} en {selected_name44}'):
-    st.write(filtered_data)
-
+    st.write(filtered_data76)
 
 
 
