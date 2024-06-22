@@ -71,11 +71,11 @@ def create_pdf():
     text = "Este es un PDF generado desde Streamlit. Aquí se muestra información sobre reservas de clientes."
     c.drawString(100, 730, text)
     # Agregar los gráficos al PDF
-    y_offset = 550  # Ajusta la posición vertical para la figura
+    y_offset = 700
     for fig in figs:
         fig.savefig("temp_plot.png")  # Guardar el gráfico como imagen temporal
         c.drawImage("temp_plot.png", 100, y_offset, width=400, height=300)
-        y_offset -= 400  # Ajustar la posición vertical para el próximo gráfico
+        y_offset -= 350  # Ajustar la posición vertical para el próximo gráfico
         c.showPage()  # Agregar una nueva página para cada gráfico
 
     # Eliminar la imagen temporal después de usarla
@@ -84,15 +84,3 @@ def create_pdf():
     
     buffer.seek(0)
     return buffer
-
-# Botón para generar el PDF
-if st.button("Generar PDF"):
-    pdf_buffer = create_pdf()
-    st.success("PDF generado con éxito!")
-    # Guardar el PDF en un archivo temporal
-    temp_file = tempfile.NamedTemporaryFile(delete=False, suffix=".pdf")
-    temp_file.write(pdf_buffer.getvalue())
-    temp_file.close()
-    
-    # Abrir el PDF en una nueva ventana del navegador
-    webbrowser.open_new_tab(temp_file.name)
