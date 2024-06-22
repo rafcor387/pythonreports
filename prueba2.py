@@ -64,37 +64,32 @@ figs.append(fig)
 def create_pdf():
     from reportlab.lib.pagesizes import letter
     from reportlab.pdfgen import canvas
-    
-    # Crear un buffer en memoria para el PDF
-    buffer = BytesIO()
-    
+    import os
+
     # Crear el documento PDF
-    c = canvas.Canvas(buffer, pagesize=letter)
-    
+    c = canvas.Canvas("report.pdf", pagesize=letter)
+
     # Título
     c.setFont("Helvetica-Bold", 16)
     c.drawString(100, 750, "Reporte de Reservas de Clientes")
-    
+
     # Párrafo
     c.setFont("Helvetica", 12)
     text = "Este es un PDF generado desde Streamlit. Aquí se muestra información sobre reservas de clientes."
     c.drawString(100, 730, text)
-    
+
     # Agregar los gráficos al PDF
     y_offset = 700
     for fig in figs:
-        buf = BytesIO()
-        fig.savefig(buf, format='png')
-        buf.seek(0)
-        c.drawImage(buf, 100, y_offset, width=400, height=300)
+        fig.savefig("temp_plot.png")  # Guardar el gráfico como imagen temporal
+        c.drawImage("temp_plot.png", 100, y_offset, width=400, height=300)
         y_offset -= 350  # Ajustar la posición vertical para el próximo gráfico
         c.showPage()  # Agregar una nueva página para cada gráfico
-    
+
+    # Eliminar la imagen temporal después de usarla
+    os.remove("temp_plot.png")
+
     c.save()
-    
-    # Obtener el contenido del buffer
-    buffer.seek(0)
-    return buffer
 
 # Botón para generar el PDF
 if st.button("Generar PDF"):
