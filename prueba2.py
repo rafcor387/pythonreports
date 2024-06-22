@@ -31,6 +31,8 @@ if st.checkbox('Mostrar dataframe'):
     st.write(df)
 
 
+# Crear gráficos
+figs = []
 # -------------------------------
 # Primer grafico de reservas de un cliente en una discoteca por meses
 # -------------------------------
@@ -57,9 +59,46 @@ st.pyplot(fig)
 # Muestra el DataFrame filtrado (opcional)
 if st.checkbox(f'Mostrar dataframe de reservas de {cliente7} en {selected_name44}'):
     st.write(filtered_data76)
+# Guardar el gráfico en la lista de figuras para el PDF
+figs.append(fig)
+
+# Función para crear el PDF con título y párrafo
+def create_pdf():
+    from reportlab.lib.pagesizes import letter
+    from reportlab.pdfgen import canvas
+
+    # Crear el documento PDF
+    c = canvas.Canvas("report.pdf", pagesize=letter)
+    
+    # Título
+    c.setFont("Helvetica-Bold", 16)
+    c.drawString(100, 750, "Reporte de Reservas de Clientes")
+    
+    # Párrafo
+    c.setFont("Helvetica", 12)
+    text = "Este es un PDF generado desde Streamlit. Aquí se muestra información sobre reservas de clientes."
+    c.drawString(100, 730, text)
+    
+    # Agregar los gráficos al PDF
+    y_offset = 700
+    for fig in figs:
+        fig.savefig("temp_plot.png")  # Guardar el gráfico como imagen temporal
+        c.drawImage("temp_plot.png", 100, y_offset, width=400, height=300)
+        y_offset -= 350  # Ajustar la posición vertical para el próximo gráfico
+        c.showPage()  # Agregar una nueva página para cada gráfico
+
+    c.save()
+
+# Botón para generar el PDF
+if st.button("Generar PDF"):
+    create_pdf()
+    st.success("PDF generado con éxito!")
+
+    # Ofrecer enlace para descargar el PDF
+    st.markdown("[Descargar PDF](report.pdf)")
 
 
-
+    
 # -------------------------------
 # Primer gráfico de pie
 # -------------------------------
