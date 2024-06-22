@@ -35,30 +35,29 @@ if st.checkbox('Mostrar dataframe'):
 # Primer grafico de reservas de un cliente en una discoteca por meses
 # -------------------------------
 st.text('1. RESERVAS DE CLIENTES EN UNA DISCOTECA POR MESES')
-option = st.selectbox('Selecciona el cliente:', df['cliente'].unique())
+cliente7 = st.selectbox('Selecciona el cliente:', df['cliente'].unique())
 selected_name44 = st.selectbox('Selecciona la discoteca:', df['discoteca'].unique())
-
-filtered_data76 = df[(df['cliente'] == option) & (df['discoteca'] == selected_name44)]
+filtered_data76 = df[(df['cliente'] == cliente7) & (df['discoteca'] == selected_name44)]
 daily_counts45 = filtered_data76['fechaHora'].dt.month.value_counts().sort_index()
 max_value = daily_counts45.max()
 # Reindexar para asegurar que todos los meses estén presentes
 month = np.arange(1, 13)  # Array con los números de los meses (1-12)
 reser = np.arange(1,max_value+1)
 daily_counts45 = daily_counts45.reindex(month, fill_value=0)
-
 # Crear un gráfico de barras usando Matplotlib
 fig, ax = plt.subplots()
 ax.bar(daily_counts45.index, daily_counts45.values)
 ax.set_xticks(month)  # Asegurar que todos los meses se muestren en el eje x
-ax.set_yticks(reser)  # Asegurar que todos los meses se muestren en el eje y
+ax.set_yticks(reser)  # Asegurar que todas las reservas se muestren en el eje y
 ax.set_xlabel('Mes')
 ax.set_ylabel('Número de reservas')
-ax.set_title(f'Número de reservas realizadas por meses en {selected_name44} para {option}')
-
+ax.set_title(f'Número de reservas realizadas por meses en {selected_name44} para {cliente7}')
 # Mostrar el gráfico de barras
 st.pyplot(fig)
 st.write(filtered_data76)
-
+# Muestra el DataFrame filtrado (opcional)
+if st.checkbox(f'Mostrar dataframe de reservas de {cliente7} en {selected_name44}'):
+    st.write(filtered_data)
 
 
 
