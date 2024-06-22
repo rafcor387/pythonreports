@@ -40,15 +40,17 @@ selected_name44 = st.selectbox('Selecciona la discoteca:', df['discoteca'].uniqu
 
 filtered_data76 = df[(df['cliente'] == option) & (df['discoteca'] == selected_name44)]
 daily_counts45 = filtered_data76['fechaHora'].dt.month.value_counts().sort_index()
-
+max_value = daily_counts45.max()
 # Reindexar para asegurar que todos los meses estén presentes
 months = np.arange(1, 13)  # Array con los números de los meses (1-12)
+reser = np.range(1,max_value+1)
 daily_counts45 = daily_counts45.reindex(months, fill_value=0)
 
 # Crear un gráfico de barras usando Matplotlib
 fig, ax = plt.subplots()
 ax.bar(daily_counts45.index, daily_counts45.values)
 ax.set_xticks(months)  # Asegurar que todos los meses se muestren en el eje x
+ax.set_yticks(reser)  # Asegurar que todos los meses se muestren en el eje y
 ax.set_xlabel('Mes')
 ax.set_ylabel('Número de reservas')
 ax.set_title(f'Número de reservas realizadas por meses en {selected_name44} para {option}')
