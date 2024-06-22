@@ -9,25 +9,48 @@ st.title("Resultados de analisis de discotecas")
 
 df = pd.read_csv('datsetdisco.csv')
 
+# Convierte la columna 'fechaHora' al tipo de dato de fecha y hora
+df['fechaHora'] = pd.to_datetime(df['fechaHora'])
+# Convierte la columna 'fecha' al tipo de dato de fecha
+df['fecha'] = pd.to_datetime(df['fecha'])
+# Campo de selección para elegir un mes
+months = {
+    'Enero': 1, 'Febrero': 2, 'Marzo': 3, 'Abril': 4,
+    'Mayo': 5, 'Junio': 6, 'Julio': 7, 'Agosto': 8,
+    'Septiembre': 9, 'Octubre': 10, 'Noviembre': 11, 'Diciembre': 12
+}
+
+# -------------------------------
+# mostrar el dataframe completo
+# -------------------------------
 st.text('DATAFRAME DE DISCOTECA')
 if st.checkbox('Mostrar dataframe'):
     st.write(df)
 
 
-
+# -------------------------------
+# Primer grafico de reservas de un cliente en una discoteca por meses
+# -------------------------------
 st.text('INFORMACION SOBRE CLIENTE')
 option = st.selectbox('Selecciona el cliente: ',df['cliente'].unique())
 #Campo de selección para elegir un nombre
 selected_name44 = st.selectbox('Selecciona la discoteca:', df['discoteca'].unique())
 filtered_data76 = df[(df['cliente'] == option) & (df['discoteca'] == selected_name44)]
+# Cuenta el número de filas para cada día del mes
+daily_counts45 = filtered_data76['fechaHora'].dt.month.value_counts().sort_index()
+# Crea un gráfico de líneas usando Matplotlib
+fig, ax = plt.subplots()
+#ax.plot(daily_counts.index, daily_counts.values, marker='o')
+ax.plot(daily_counts45.index, daily_counts45.values)
+ax.set_xlabel('mes')
+ax.set_ylabel('Número de reservas')
+ax.set_title(f'Número de reservas realizadas por meses en {selected_name44} para {option}')
+# Muestra el gráfico de líneas
+st.pyplot(fig)
 st.write(filtered_data76)
 
 
 
-# Convierte la columna 'fechaHora' al tipo de dato de fecha y hora
-df['fechaHora'] = pd.to_datetime(df['fechaHora'])
-# Convierte la columna 'fecha' al tipo de dato de fecha
-df['fecha'] = pd.to_datetime(df['fecha'])
 
 
 # -------------------------------
@@ -64,12 +87,6 @@ st.write(f'Total de reservas para la fecha {date_input}: {len(filtered_data)}')
 # Segundo gráfico de líneas
 # -------------------------------
 st.text('REPORTE DE RESERVAS REALIZADAS EN UNA FECHA')
-# Campo de selección para elegir un mes
-months = {
-    'Enero': 1, 'Febrero': 2, 'Marzo': 3, 'Abril': 4,
-    'Mayo': 5, 'Junio': 6, 'Julio': 7, 'Agosto': 8,
-    'Septiembre': 9, 'Octubre': 10, 'Noviembre': 11, 'Diciembre': 12
-}
 selected_month = st.selectbox('Selecciona un mes:', list(months.keys()), key='month_select_1')
 # Campo de selección para elegir un nombre
 names = df['discoteca'].unique()
