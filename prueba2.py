@@ -103,12 +103,12 @@ selected_mes = st.selectbox('Selecciona un mes:', meses)
 selected_discoteca = st.selectbox('Selecciona una discoteca:', discotecas)
 
 # Filtrar los datos según las selecciones del usuario
-filtered_data = df[(df['cliente'] == selected_cliente) & 
+filtered_data0 = df[(df['cliente'] == selected_cliente) & 
                    (df['fecha'].dt.month_name() == selected_mes) & 
                    (df['discoteca'] == selected_discoteca)]
 
 # Contar el número de filas para cada valor único de numMesa
-bar_data = filtered_data['numMesa'].value_counts().sort_index()
+bar_data = filtered_data0['numMesa'].value_counts().sort_index()
 
 # Crear el gráfico de barras
 plt.figure(figsize=(10, 6))
