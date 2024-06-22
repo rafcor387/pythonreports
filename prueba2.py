@@ -2,6 +2,7 @@ import pandas as pd
 import streamlit as st
 from datetime import datetime
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 st.header('Gráficas utilizando Pandas y streamlit', divider='rainbow')
 st.title("Resultados de analisis de discotecas")
@@ -84,6 +85,27 @@ st.pyplot(fig)
 if st.checkbox('Mostrar dataframe de reservas realizadas en una fecha'):
     st.write(filtered_data)
 
+
+
+#prueba con headmap
+selected_month3 = st.selectbox('Selecciona un mes:', list(months.keys()), key='month_select_4')
+
+# Filtra los registros que coinciden con el mes seleccionado
+month_num3 = months[selected_month3]
+filtered_data3 = df[df['fecha'].dt.month == month_num3]
+
+# Crear una tabla de conteo de reservas por día y discoteca
+heatmap_data = filtered_data3.pivot_table(index=filtered_data3['fecha'].dt.day, columns='discoteca', aggfunc='size', fill_value=0)
+
+# Crear el heatmap usando Seaborn
+fig, ax = plt.subplots(figsize=(10, 6))
+sns.heatmap(heatmap_data, annot=True, fmt="d", cmap='YlGnBu', ax=ax)
+ax.set_title(f'Reservas diarias por discoteca en {selected_month3}')
+ax.set_xlabel('Discoteca')
+ax.set_ylabel('Día del mes')
+
+# Mostrar el heatmap en Streamlit
+st.pyplot(fig)
 
 
 
