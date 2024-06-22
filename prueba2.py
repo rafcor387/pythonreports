@@ -19,11 +19,7 @@ months = {
     'Mayo': 5, 'Junio': 6, 'Julio': 7, 'Agosto': 8,
     'Septiembre': 9, 'Octubre': 10, 'Noviembre': 11, 'Diciembre': 12
 }
-months2 = {
-    1: 'Enero', 2: 'Febrero', 3: 'Marzo', 4: 'Abril',
-    5 :'Mayo', 6 :'Junio' ,  7: 'Julio',  8: 'Agosto',
-     9 :'Septiembre',  10 :'Octubre',  11 : 'Noviembre',  12:'Diciembre'
-}
+
 
 
 # -------------------------------
@@ -37,25 +33,37 @@ if st.checkbox('Mostrar dataframe'):
 # -------------------------------
 # Primer grafico de reservas de un cliente en una discoteca por meses
 # -------------------------------
+# Definir los nombres de los meses
+months2 = {
+    1: 'Enero', 2: 'Febrero', 3: 'Marzo', 4: 'Abril',
+    5: 'Mayo', 6: 'Junio', 7: 'Julio', 8: 'Agosto',
+    9: 'Septiembre', 10: 'Octubre', 11: 'Noviembre', 12: 'Diciembre'
+}
+
 st.text('INFORMACION SOBRE CLIENTE')
-option = st.selectbox('Selecciona el cliente: ',df['cliente'].unique())
-#Campo de selección para elegir un nombre
+option = st.selectbox('Selecciona el cliente: ', df['cliente'].unique())
+# Campo de selección para elegir una discoteca
 selected_name44 = st.selectbox('Selecciona la discoteca:', df['discoteca'].unique())
+
 filtered_data76 = df[(df['cliente'] == option) & (df['discoteca'] == selected_name44)]
-# Cuenta el número de filas para cada día del mes
-daily_counts45 = filtered_data76['fechaHora'].dt.month.value_counts().sort_index()
-# Crea un gráfico de líneas usando Matplotlib
+# Cuenta el número de filas para cada mes
+monthly_counts = filtered_data76['fechaHora'].dt.month.value_counts().sort_index()
+
+# Crear un gráfico de líneas usando Matplotlib
 fig, ax = plt.subplots()
-#ax.plot(daily_counts.index, daily_counts.values, marker='o')
-ax.plot(months[daily_counts45.index], daily_counts45.values)
-ax.set_xlabel('mes')
+ax.plot(monthly_counts.index, monthly_counts.values, marker='o')
+
+# Ajustar los valores del eje X para que muestren los nombres de los meses
+ax.set_xticks(monthly_counts.index)
+ax.set_xticklabels([months2[month] for month in monthly_counts.index])
+
+ax.set_xlabel('Mes')
 ax.set_ylabel('Número de reservas')
-ax.set_title(f'Número de reservas realizadas por meses en {selected_name44} para {option}')
+ax.set_title(f'Número de reservas realizadas por mes en {selected_name44} para {option}')
+
 # Muestra el gráfico de líneas
 st.pyplot(fig)
 st.write(filtered_data76)
-
-
 
 
 
