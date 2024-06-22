@@ -34,20 +34,25 @@ if st.checkbox('Mostrar dataframe'):
 # Primer grafico de reservas de un cliente en una discoteca por meses
 # -------------------------------
 st.text('INFORMACION SOBRE CLIENTE')
-option = st.selectbox('Selecciona el cliente: ',df['cliente'].unique())
-#Campo de selección para elegir un nombre
+option = st.selectbox('Selecciona el cliente:', df['cliente'].unique())
 selected_name44 = st.selectbox('Selecciona la discoteca:', df['discoteca'].unique())
+
 filtered_data76 = df[(df['cliente'] == option) & (df['discoteca'] == selected_name44)]
-# Cuenta el número de filas para cada día del mes
 daily_counts45 = filtered_data76['fechaHora'].dt.month.value_counts().sort_index()
-# Crea un gráfico de líneas usando Matplotlib
+
+# Reindexar para asegurar que todos los meses estén presentes
+months = np.arange(1, 13)  # Array con los números de los meses (1-12)
+daily_counts45 = daily_counts45.reindex(months, fill_value=0)
+
+# Crear un gráfico de líneas usando Matplotlib
 fig, ax = plt.subplots()
-#ax.plot(daily_counts.index, daily_counts.values, marker='o')
-ax.plot(daily_counts45.index, daily_counts45.values)
-ax.set_xlabel('mes')
+ax.plot(daily_counts45.index, daily_counts45.values, marker='o')
+ax.set_xticks(months)  # Asegurar que todos los meses se muestren en el eje x
+ax.set_xlabel('Mes')
 ax.set_ylabel('Número de reservas')
 ax.set_title(f'Número de reservas realizadas por meses en {selected_name44} para {option}')
-# Muestra el gráfico de líneas
+
+# Mostrar el gráfico de líneas
 st.pyplot(fig)
 st.write(filtered_data76)
 
