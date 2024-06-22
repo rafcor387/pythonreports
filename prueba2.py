@@ -8,8 +8,8 @@ st.title("Resultados de analisis de discotecas")
 
 df = pd.read_csv('datasetdisco.csv')
 
-if st.checkbox('Mostrar dataframe'):
-    st.write(df)
+#if st.checkbox('Mostrar dataframe'):
+ #   st.write(df)
 
 
 option = st.selectbox('Selecciona el cliente: ',df['cliente'])
@@ -107,10 +107,11 @@ ax.set_title(f'Número de reservas canceladas por día en {selected_month1} para
 # Muestra el gráfico de barras
 st.pyplot(fig)
 # Muestra el DataFrame filtrado (opcional)
-#st.write(filtered_data_cancelled)
-
-if st.checkbox('Mostrar dataframe'):
+st.write(filtered_data_cancelled)
+if st.checkbox('Mostrar dataframefaf'):
     st.write(filtered_data_cancelled)
+
+
 
 
 
