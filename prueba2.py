@@ -1,10 +1,11 @@
 import pandas as pd
 import streamlit as st
-from datetime import datetime
 import matplotlib.pyplot as plt
-import seaborn as sns
 import numpy as np
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
 from io import BytesIO
+import webbrowser
 import os
 
 st.header('Gráficas utilizando Pandas y Streamlit', divider='rainbow')
@@ -51,11 +52,9 @@ if st.checkbox(f'Mostrar dataframe de reservas de {cliente7} en {selected_name44
     st.write(filtered_data76)
 # Guardar el gráfico en la lista de figuras para el PDF
 figs.append(fig)
+
 # Función para crear el PDF con título y párrafo
 def create_pdf():
-    from reportlab.lib.pagesizes import letter
-    from reportlab.pdfgen import canvas
-    # Crear un buffer en memoria para el PDF
     buffer = BytesIO()
     # Crear el documento PDF
     c = canvas.Canvas(buffer, pagesize=letter)
@@ -69,13 +68,14 @@ def create_pdf():
     # Agregar los gráficos al PDF
     y_offset = 700
     for fig in figs:
-        fig.savefig(buffer, format='png')  # Guardar el gráfico como imagen en el buffer
+        fig.savefig(buffer, format='png')
         c.drawImage(buffer, 100, y_offset, width=400, height=300)
-        y_offset -= 350  # Ajustar la posición vertical para el próximo gráfico
-        c.showPage()  # Agregar una nueva página para cada gráfico
+        y_offset -= 350
+        c.showPage()
     c.save()
     # Obtener los datos binarios del buffer
     pdf_data = buffer.getvalue()
+    buffer.close()
     return pdf_data
 
 # Botón para generar el PDF
@@ -89,5 +89,4 @@ if st.button("Generar PDF"):
         f.write(pdf_data)
     
     # Abrir el PDF en una nueva pestaña del navegador
-    import webbrowser
     webbrowser.open('file://' + os.path.realpath(temp_pdf_file))
