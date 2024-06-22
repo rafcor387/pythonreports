@@ -1,10 +1,12 @@
 import pandas as pd
 import streamlit as st
-from datetime import datetime
 import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
 from io import BytesIO
+import tempfile
+import webbrowser
+
 st.header('Gráficas utilizando Pandas y Streamlit', divider='rainbow')
 st.title("Resultados de análisis de discotecas")
 df = pd.read_csv('datsetdisco.csv')
@@ -50,6 +52,7 @@ if st.checkbox(f'Mostrar dataframe de reservas de {cliente7} en {selected_name44
 # Guardar el gráfico en la lista de figuras para el PDF
 figs.append(fig)
 # Función para crear el PDF con título y párrafo
+# Función para crear el PDF con título y párrafo
 def create_pdf():
     from reportlab.lib.pagesizes import letter
     from reportlab.pdfgen import canvas
@@ -68,11 +71,11 @@ def create_pdf():
     text = "Este es un PDF generado desde Streamlit. Aquí se muestra información sobre reservas de clientes."
     c.drawString(100, 730, text)
     # Agregar los gráficos al PDF
-    y_offset = 700
+    y_offset = 550  # Ajusta la posición vertical para la figura
     for fig in figs:
         fig.savefig("temp_plot.png")  # Guardar el gráfico como imagen temporal
         c.drawImage("temp_plot.png", 100, y_offset, width=400, height=300)
-        y_offset -= 350  # Ajustar la posición vertical para el próximo gráfico
+        y_offset -= 400  # Ajustar la posición vertical para el próximo gráfico
         c.showPage()  # Agregar una nueva página para cada gráfico
 
     # Eliminar la imagen temporal después de usarla
@@ -81,14 +84,16 @@ def create_pdf():
     
     buffer.seek(0)
     return buffer
+
 # Botón para generar el PDF
 if st.button("Generar PDF"):
     pdf_buffer = create_pdf()
     st.success("PDF generado con éxito!")
-    # Proporcionar enlace para descargar el PDF
-    st.download_button(
-        label="Descargar PDF",
-        data=pdf_buffer,
-        file_name="report.pdf",
-        mime="application/pdf"
-    )
+    
+    # Guardar el PDF en un archivo temporal
+    temp_file = tempfile.NamedTemporaryFile(delete=False, suffix=".pdf")
+    temp_file.write(pdf_buffer.getvalue())
+    temp_file.close()
+    
+    # Abrir el PDF en una nueva ventana del navegador
+    webbrowser.open_new_tab(temp_file.name)
