@@ -107,7 +107,14 @@ ax.set_title(f'Número de reservas canceladas por día en {selected_month1} para
 # Muestra el gráfico de barras
 st.pyplot(fig)
 # Muestra el DataFrame filtrado (opcional)
-st.write(filtered_data_cancelled)
+#st.write(filtered_data_cancelled)
+
+if st.checkbox('Mostrar dataframe'):
+    st.write(filtered_data_cancelled)
+
+
+
+
 
 
 # -------------------------------
