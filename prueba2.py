@@ -9,13 +9,17 @@ st.title("Resultados de analisis de discotecas")
 
 df = pd.read_csv('datsetdisco.csv')
 
+st.text('DATAFRAME DE DISCOTECA')
 if st.checkbox('Mostrar dataframe'):
     st.write(df)
 
 
 
-
-option = st.selectbox('Selecciona el cliente: ',df['cliente'])
+st.text('INFORMACION SOBRE CLIENTE')
+option = st.selectbox('Selecciona el cliente: ',df['cliente'].unique)
+# Campo de selección para elegir un nombre
+#names = df['discoteca'].unique()
+#selected_name = st.selectbox('Selecciona la discoteca:', names)
 df.loc[df['cliente'] == option]
 
 
@@ -100,7 +104,6 @@ discotecas = df['discoteca'].unique()
 selected_cliente = st.selectbox('Selecciona un cliente:', clientes)
 selected_mes = st.selectbox('Selecciona un mes:', meses)
 selected_discoteca = st.selectbox('Selecciona una discoteca:', discotecas)
-
 # Filtrar los datos según las selecciones del usuario
 filtered_data0 = df[(df['cliente'] == selected_cliente) & 
                    (df['fecha'].dt.month_name() == selected_mes) & 
@@ -108,7 +111,6 @@ filtered_data0 = df[(df['cliente'] == selected_cliente) &
 
 # Contar el número de filas para cada valor único de numMesa
 bar_data = filtered_data0['numMesa'].value_counts().sort_index()
-
 # Crear el gráfico de barras
 fig, ax = plt.subplots()
 ax.bar(bar_data.index, bar_data.values)  # Usamos bar_data en lugar de daily_counts
@@ -119,20 +121,20 @@ ax.set_ylim(bottom=0, top=bar_data.max() + 1)  # Establecemos los límites del e
 # Muestra el gráfico de barras
 st.pyplot(fig)
 
+
+
+
 #violin
 selected_month9 = st.selectbox('Selecciona un mes:', list(months.keys()), key='month_select_9')
-
 # Filtra los registros que coinciden con el mes seleccionado
 month_num9 = months[selected_month9]
 filtered_data9 = df[df['fecha'].dt.month == month_num9]
-
 # Crear un gráfico de violín del número de reservas por discoteca
 fig, ax = plt.subplots(figsize=(10, 6))
 sns.violinplot(data=filtered_data9, x='discoteca', y='idMesa', ax=ax)
 ax.set_title(f'Distribución de reservas por discoteca en {selected_month9}')
 ax.set_xlabel('Discoteca')
 ax.set_ylabel('Número de reservas (idMesa)')
-
 # Mostrar el gráfico de violín en Streamlit
 st.pyplot(fig)
 
