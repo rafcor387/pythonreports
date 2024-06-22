@@ -59,16 +59,15 @@ if st.checkbox(f'Mostrar dataframe de reservas de {cliente7} en {selected_name44
 
 # Guardar el gráfico en la lista de figuras para el PDF
 figs.append(fig)
+
+# Función para crear el PDF con título y párrafo
 def create_pdf():
     from reportlab.lib.pagesizes import letter
     from reportlab.pdfgen import canvas
-    from io import BytesIO
-
-    # Crear un buffer en memoria para el PDF
-    buffer = BytesIO()
+    import os
 
     # Crear el documento PDF
-    c = canvas.Canvas(buffer, pagesize=letter)
+    c = canvas.Canvas("report.pdf", pagesize=letter)
 
     # Título
     c.setFont("Helvetica-Bold", 16)
@@ -82,30 +81,25 @@ def create_pdf():
     # Agregar los gráficos al PDF
     y_offset = 700
     for fig in figs:
-        fig.savefig(buffer, format='png')
+        fig.savefig("temp_plot.png")  # Guardar el gráfico como imagen temporal
+        c.drawImage("temp_plot.png", 100, y_offset, width=400, height=300)
+        y_offset -= 350  # Ajustar la posición vertical para el próximo gráfico
         c.showPage()  # Agregar una nueva página para cada gráfico
 
-    # Guardar el contenido del PDF
+    # Eliminar la imagen temporal después de usarla
+    os.remove("temp_plot.png")
+
     c.save()
-
-    # Obtener los datos binarios del buffer
-    pdf_data = buffer.getvalue()
-
-    # Reiniciar el buffer para permitir la reutilización
-    buffer.seek(0)
-    buffer.truncate(0)
-
-    return pdf_data
 
 # Botón para generar el PDF
 if st.button("Generar PDF"):
-    pdf_data = create_pdf()
+    pdf_buffer = create_pdf()
     st.success("PDF generado con éxito!")
-
+    
     # Proporcionar enlace para descargar el PDF
     st.download_button(
         label="Descargar PDF",
-        data=pdf_data,
+        data=pdf_buffer,
         file_name="report.pdf",
         mime="application/pdf"
     )
