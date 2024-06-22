@@ -13,6 +13,8 @@ if st.checkbox('Mostrar dataframe'):
     st.write(df)
 
 
+
+
 option = st.selectbox('Selecciona el cliente: ',df['cliente'])
 df.loc[df['cliente'] == option]
 
@@ -22,6 +24,7 @@ df.loc[df['cliente'] == option]
 df['fechaHora'] = pd.to_datetime(df['fechaHora'])
 # Convierte la columna 'fecha' al tipo de dato de fecha
 df['fecha'] = pd.to_datetime(df['fecha'])
+
 
 # -------------------------------
 # Primer gráfico de pie
@@ -87,24 +90,18 @@ if st.checkbox('Mostrar dataframe de reservas realizadas en una fecha'):
 
 
 
-#prueba con headmap
-selected_month3 = st.selectbox('Selecciona un mes:', list(months.keys()), key='month_select_4')
-
+#boxplot
+selected_month5 = st.selectbox('Selecciona un mes:', list(months.keys()), key='month_select_6')
 # Filtra los registros que coinciden con el mes seleccionado
-month_num3 = months[selected_month3]
-filtered_data3 = df[df['fecha'].dt.month == month_num3]
-
-# Crear una tabla de conteo de reservas por día y discoteca
-heatmap_data = filtered_data3.pivot_table(index=filtered_data3['fecha'].dt.day, columns='discoteca', aggfunc='size', fill_value=0)
-
-# Crear el heatmap usando Seaborn
+month_num5 = months[selected_month5]
+filtered_data5 = df[df['fechaHora'].dt.month == month_num5]
+# Crear un boxplot de las reservas diarias por discoteca para el mes seleccionado
 fig, ax = plt.subplots(figsize=(10, 6))
-sns.heatmap(heatmap_data, annot=True, fmt="d", cmap='YlGnBu', ax=ax)
-ax.set_title(f'Reservas diarias por discoteca en {selected_month3}')
+sns.boxplot(data=filtered_data5, x='discoteca', y='idMesa', ax=ax)
+ax.set_title(f'Boxplot de reservas por día y discoteca en {selected_month5}')
 ax.set_xlabel('Discoteca')
-ax.set_ylabel('Día del mes')
-
-# Mostrar el heatmap en Streamlit
+ax.set_ylabel('Número de reservas')
+# Mostrar el boxplot en Streamlit
 st.pyplot(fig)
 
 
@@ -138,11 +135,6 @@ if st.checkbox('Mostrar dataframe de reservas canceladas'):
 
 
 
-
-
-
-
-
 # -------------------------------
 # Cuarto gráfico de histogramas
 # -------------------------------
@@ -167,3 +159,24 @@ ax.set_title(f'Número de fechas reservadas por día en {selected_month2} para {
 st.pyplot(fig)
 # Muestra el DataFrame filtrado (opcional)
 st.write(filtered_data_reserved)
+
+
+
+
+# -------------------------------
+# Quinto gráfico de Headmap
+# -------------------------------
+selected_month3 = st.selectbox('Selecciona un mes:', list(months.keys()), key='month_select_4')
+# Filtra los registros que coinciden con el mes seleccionado
+month_num3 = months[selected_month3]
+filtered_data3 = df[df['fecha'].dt.month == month_num3]
+# Crear una tabla de conteo de reservas por día y discoteca
+heatmap_data = filtered_data3.pivot_table(index=filtered_data3['fecha'].dt.day, columns='discoteca', aggfunc='size', fill_value=0)
+# Crear el heatmap usando Seaborn
+fig, ax = plt.subplots(figsize=(10, 6))
+sns.heatmap(heatmap_data, annot=True, fmt="d", cmap='YlGnBu', ax=ax)
+ax.set_title(f'Reservas diarias por discoteca en {selected_month3}')
+ax.set_xlabel('Discoteca')
+ax.set_ylabel('Día del mes')
+# Mostrar el heatmap en Streamlit
+st.pyplot(fig)
