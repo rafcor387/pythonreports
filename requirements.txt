@@ -3,6 +3,4 @@ pandas
 matplotlib
 seaborn
 reportlab
-webbrowser
-tempfile
 numpy
