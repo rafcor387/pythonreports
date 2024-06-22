@@ -91,11 +91,11 @@ if st.checkbox('Mostrar dataframe de reservas realizadas en una fecha'):
 
 
 
-#clientes por nummesa
 # Obtener los nombres únicos de los clientes, meses y discotecas
 clientes = df['cliente'].unique()
 meses = df['fecha'].dt.month_name().unique()
 discotecas = df['discoteca'].unique()
+
 # Selección de usuario
 selected_cliente = st.selectbox('Selecciona un cliente:', clientes)
 selected_mes = st.selectbox('Selecciona un mes:', meses)
@@ -110,14 +110,23 @@ filtered_data0 = df[(df['cliente'] == selected_cliente) &
 bar_data = filtered_data0['numMesa'].value_counts().sort_index()
 
 # Crear el gráfico de barras
-# Crear un gráfico de barras usando Matplotlib
 fig, ax = plt.subplots()
-ax.scatter(bar_data.index, bar_data.values)  # Usamos bar_data en lugar de daily_counts
-ax.set_xlabel('Número de Mesa')  # Cambiamos el texto del eje x
-ax.set_ylabel('Número de reservas')  # Cambiamos el texto del eje y
-ax.set_title(f'Número de reservas para el cliente {selected_cliente}, mes {selected_mes} en {selected_discoteca}')  # Ajustamos el título
-# Muestra el gráfico de barras
+ax.scatter(bar_data.index, bar_data.values)  
+ax.set_xlabel('Número de Mesa')
+ax.set_ylabel('Número de reservas')
+ax.set_title(f'Número de reservas para el cliente {selected_cliente}, mes {selected_mes} en {selected_discoteca}')  
+
+# Asegurarse de que el eje y muestre solo números enteros
+ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda x, _: int(x)))
+
+# Mostrar el gráfico
 st.pyplot(fig)
+
+
+
+
+
+
 
 #violin
 selected_month9 = st.selectbox('Selecciona un mes:', list(months.keys()), key='month_select_9')
