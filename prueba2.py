@@ -3,6 +3,7 @@ import streamlit as st
 from datetime import datetime
 import matplotlib.pyplot as plt
 import seaborn as sns
+import numpy as np
 
 st.header('Gráficas utilizando Pandas y streamlit', divider='rainbow')
 st.title("Resultados de analisis de discotecas")
