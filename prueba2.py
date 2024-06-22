@@ -170,7 +170,7 @@ if st.checkbox('Mostrar dataframe de reporte de fechas reservadas'):
 selected_month3 = st.selectbox('Selecciona un mes:', list(months.keys()), key='month_select_4')
 # Filtra los registros que coinciden con el mes seleccionado
 month_num3 = months[selected_month3]
-filtered_data3 = df[df['fecha'].dt.month == month_num3]
+filtered_data3 = df[df['fechaHora'].dt.month == month_num3]
 # Crear una tabla de conteo de reservas por día y discoteca
 heatmap_data = filtered_data3.pivot_table(index=filtered_data3['fecha'].dt.day, columns='discoteca', aggfunc='size', fill_value=0)
 # Crear el heatmap usando Seaborn
