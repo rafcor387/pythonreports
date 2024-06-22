@@ -47,7 +47,7 @@ daily_counts45 = filtered_data76['fechaHora'].dt.month.value_counts().sort_index
 # Crea un gráfico de líneas usando Matplotlib
 fig, ax = plt.subplots()
 #ax.plot(daily_counts.index, daily_counts.values, marker='o')
-ax.plot(months2[daily_counts45.index], daily_counts45.values)
+ax.plot(months[daily_counts45.index], daily_counts45.values)
 ax.set_xlabel('mes')
 ax.set_ylabel('Número de reservas')
 ax.set_title(f'Número de reservas realizadas por meses en {selected_name44} para {option}')
