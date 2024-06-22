@@ -110,12 +110,12 @@ filtered_data0 = df[(df['cliente'] == selected_cliente) &
 bar_data = filtered_data0['numMesa'].value_counts().sort_index()
 
 # Crear el gráfico de barras
-# Crear un gráfico de barras usando Matplotlib
 fig, ax = plt.subplots()
 ax.bar(bar_data.index, bar_data.values)  # Usamos bar_data en lugar de daily_counts
 ax.set_xlabel('Número de Mesa')  # Cambiamos el texto del eje x
 ax.set_ylabel('Número de reservas')  # Cambiamos el texto del eje y
 ax.set_title(f'Número de reservas para el cliente {selected_cliente}, mes {selected_mes} en {selected_discoteca}')  # Ajustamos el título
+ax.set_ylim(bottom=0, top=bar_data.max() + 1)  # Establecemos los límites del eje y como enteros
 # Muestra el gráfico de barras
 st.pyplot(fig)
 
