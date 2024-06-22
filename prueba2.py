@@ -45,15 +45,15 @@ daily_counts45 = filtered_data76['fechaHora'].dt.month.value_counts().sort_index
 months = np.arange(1, 13)  # Array con los números de los meses (1-12)
 daily_counts45 = daily_counts45.reindex(months, fill_value=0)
 
-# Crear un gráfico de líneas usando Matplotlib
+# Crear un gráfico de barras usando Matplotlib
 fig, ax = plt.subplots()
-ax.bar(daily_counts45.index, daily_counts45.values, marker='o')
+ax.bar(daily_counts45.index, daily_counts45.values)
 ax.set_xticks(months)  # Asegurar que todos los meses se muestren en el eje x
 ax.set_xlabel('Mes')
 ax.set_ylabel('Número de reservas')
 ax.set_title(f'Número de reservas realizadas por meses en {selected_name44} para {option}')
 
-# Mostrar el gráfico de líneas
+# Mostrar el gráfico de barras
 st.pyplot(fig)
 st.write(filtered_data76)
 
