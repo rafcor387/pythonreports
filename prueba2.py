@@ -158,7 +158,8 @@ ax.set_title(f'Número de fechas reservadas por día en {selected_month2} para {
 # Muestra el histograma
 st.pyplot(fig)
 # Muestra el DataFrame filtrado (opcional)
-st.write(filtered_data_reserved)
+if st.checkbox('Mostrar dataframe de reporte de fechas reservadas'):
+    st.write(filtered_data_reserved)
 
 
 
