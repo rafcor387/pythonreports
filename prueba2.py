@@ -7,7 +7,7 @@ import seaborn as sns
 st.header('Gráficas utilizando Pandas y streamlit', divider='rainbow')
 st.title("Resultados de analisis de discotecas")
 
-df = pd.read_csv('datasetdisco.csv')
+df = pd.read_csv('datsetdisco.csv')
 
 if st.checkbox('Mostrar dataframe'):
     st.write(df)
