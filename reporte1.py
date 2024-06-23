@@ -49,10 +49,10 @@ def create_pdf(figs, logo_path="logo6.jpg"):
     os.remove("temp_plot.png")
 
     # Firmas
-    c.drawString(100, 50, "Ing. Rodian Raskólnikov")
-    c.drawString(100, 35, "Ing. Sistemas.")
-    c.drawString(400, 50, "Ing. Oscar Quiroga")
-    c.drawString(400, 35, "Director.")
+    c.drawString(100, 150, "Ing. Rodian Raskólnikov")
+    c.drawString(100, 135, "Ing. Sistemas.")
+    c.drawString(400, 150, "Ing. Oscar Quiroga")
+    c.drawString(400, 135, "Director.")
 
     c.showPage()
     c.save()
