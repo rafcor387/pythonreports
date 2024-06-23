@@ -109,10 +109,10 @@ st.download_button(
 # Segundo gráfico de líneas
 # -------------------------------
 st.text('3. REPORTE DE RESERVAS REALIZADAS EN UN MES Y DISCOTECA')
-selected_month = st.selectbox('Selecciona un mes:', list(months.keys()), key='month_select_145')
+selected_month = st.selectbox('Selecciona un mes:', list(months.keys()), key='month_select_1485')
 # Campo de selección para elegir un nombre
 names = df['discoteca'].unique()
-selected_name = st.selectbox('Selecciona la discoteca:', names, key='name_select_1')
+selected_name = st.selectbox('Selecciona la discoteca:', names, key='name_select_1486')
 # Filtra los registros que coinciden con el mes y el nombre seleccionados
 month_num = months[selected_month]
 filtered_data = df[(df['fechaHora'].dt.month == month_num) & (df['discoteca'] == selected_name)]
@@ -126,7 +126,7 @@ ax.set_xlabel('Día del mes')
 ax.set_ylabel('Número de reservas')
 ax.set_title(f'Número de reservas realizadas por dia en {selected_month} para {selected_name}')
 # Muestra el gráfico de líneas
-st.pyplot(fig)
+st.pyplot(fig3)
 # Muestra el DataFrame filtrado (opcional)
 if st.checkbox('Mostrar dataframe de reservas realizadas en una fecha'):
     st.write(filtered_data)
