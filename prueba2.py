@@ -91,10 +91,10 @@ st.write(f'Total de reservas para la fecha {date_input}: {len(filtered_data)}')
 # Guardar el gráfico en la lista de figuras para el PDF
 figs.append(fig1)
 # Botón para generar y descargar el PDF
-pdf_buffer = create_pdf(fig1)
+pdf_buffer1 = create_pdf(fig1)
 st.download_button(
     label="Generar y Descargar PDF",
-    data=pdf_buffer,
+    data=pdf_buffer1,
     file_name="report.pdf",
     mime="application/pdf"
 )
