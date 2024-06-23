@@ -37,7 +37,7 @@ if st.checkbox('Mostrar dataframe'):
 figs = []
 
 # Primer gráfico de reservas de un cliente en una discoteca por meses
-st.text('1. RESERVAS DE CLIENTES EN UNA DISCOTECA POR MESES')
+st.text('1. Análisis de Reservas Mensuales en Discotecas por Cliente')
 cliente7 = st.selectbox('Selecciona el cliente:', df['cliente'].unique())
 selected_name44 = st.selectbox('Selecciona la discoteca:', df['discoteca'].unique())
 filtered_data76 = df[(df['cliente'] == cliente7) & (df['discoteca'] == selected_name44)]
@@ -192,7 +192,7 @@ st.download_button(
 
 
 #violin
-st.text('5. violin')
+st.text('5. Análisis de Distribución de Reservas por Discoteca en un Mes Seleccionado')
 selected_month9 = st.selectbox('Selecciona un mes:', list(months.keys()), key='month_select_9')
 # Filtra los registros que coinciden con el mes seleccionado
 month_num9 = months[selected_month9]
@@ -230,7 +230,7 @@ st.download_button(
 
 
 #boxplot
-st.text('6. boxplot')
+st.text('6. Análisis de Reservas Mensuales por Discoteca')
 selected_month5 = st.selectbox('Selecciona un mes:', list(months.keys()), key='month_select_6')
 # Filtra los registros que coinciden con el mes seleccionado
 month_num5 = months[selected_month5]
@@ -257,7 +257,7 @@ st.download_button(
 # -------------------------------
 # Tercero gráfico de barras
 # -------------------------------
-st.text('7. REPORTE DE RESERVAS CANCELADAS')
+st.text('7. Análisis de Reservas Canceladas por Día')
 # Campo de selección para elegir un mes
 selected_month1 = st.selectbox('Selecciona un mes para reservas canceladas:', list(months.keys()), key='month_select_2')
 # Campo de selección para elegir una discoteca
@@ -294,7 +294,7 @@ st.download_button(
 # -------------------------------
 # Cuarto gráfico de histogramas
 # -------------------------------
-st.text('8. REPORTE DE FECHAS RESERVADAS')
+st.text('8. Reporte de Reservas Mensuales por Discoteca')
 # Campo de selección para elegir un mes
 selected_month2 = st.selectbox('Selecciona un mes para fechas reservadas:', list(months.keys()), key='month_select_3')
 # Campo de selección para elegir una discoteca
@@ -331,7 +331,7 @@ st.download_button(
 # -------------------------------
 # Quinto gráfico de Headmap
 # -------------------------------
-st.text('9. REPORTE DE FECHAS RESERVADAS')
+st.text('9. Análisis de Reservas Mensuales por Discoteca')
 selected_month3 = st.selectbox('Selecciona un mes:', list(months.keys()), key='month_select_4')
 # Filtra los registros que coinciden con el mes seleccionado
 month_num3 = months[selected_month3]
