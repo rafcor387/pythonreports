@@ -38,7 +38,7 @@ def create_pdf(figs, logo_path="logo6.jpg"):
     style = styles["BodyText"]
     p = Paragraph(text, style)
     p.wrapOn(c, width - 190, height - 300)
-    p.drawOn(c, 90, height - 170)
+    p.drawOn(c, 70, height - 170)
 
     # Agregar el gráfico al pie de la página
     fig = figs[0]
@@ -49,10 +49,10 @@ def create_pdf(figs, logo_path="logo6.jpg"):
     os.remove("temp_plot.png")
 
     # Firmas
-    c.drawString(100, 150, "Ing. Rodian Raskólnikov")
-    c.drawString(100, 135, "Ing. Sistemas.")
-    c.drawString(400, 150, "Ing. Oscar Quiroga")
-    c.drawString(400, 135, "Director.")
+    c.drawString(100, 180, "Ing. Rodian Raskólnikov")
+    c.drawString(100, 165, "Ing. Sistemas.")
+    c.drawString(400, 180, "Ing. Oscar Quiroga")
+    c.drawString(400, 165, "Director.")
 
     c.showPage()
     c.save()
