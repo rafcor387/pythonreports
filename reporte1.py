@@ -50,9 +50,9 @@ def create_pdf(figs, logo_path="logo6.jpg"):
 
     # Firmas
     c.drawString(100, 230, "Ing. Rodian Raskólnikov")
-    c.drawString(150, 215, "Ing. Sistemas.")
+    c.drawString(130, 215, "Ing. Sistemas.")
     c.drawString(400, 230, "Ing. Oscar Quiroga")
-    c.drawString(450, 215, "Director.")
+    c.drawString(430, 215, "Director.")
 
     c.showPage()
     c.save()
