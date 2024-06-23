@@ -7,6 +7,11 @@ from datetime import datetime
 from reporte1 import create_pdf
 from reporte1 import create_pdf2
 from reporte1 import create_pdf3
+from reporte1 import create_pdf4
+from reporte1 import create_pdf5
+from reporte1 import create_pdf6
+from reporte1 import create_pdf7
+
 
 st.header('Reportes usando Python', divider='rainbow')
 st.title("Resultados de análisis de discotecas")
@@ -161,14 +166,24 @@ filtered_data0 = df[(df['cliente'] == selected_cliente) &
 # Contar el número de filas para cada valor único de numMesa
 bar_data = filtered_data0['numMesa'].value_counts().sort_index()
 # Crear el gráfico de barras
-fig, ax = plt.subplots()
+fig4, ax = plt.subplots()
 ax.bar(bar_data.index, bar_data.values)  # Usamos bar_data en lugar de daily_counts
 ax.set_xlabel('Número de Mesa')  # Cambiamos el texto del eje x
 ax.set_ylabel('Número de reservas')  # Cambiamos el texto del eje y
 ax.set_title(f'Número de reservas para el cliente {selected_cliente}, mes {selected_mes} en {selected_discoteca}')  # Ajustamos el título
 ax.set_ylim(bottom=0, top=bar_data.max() + 1)  # Establecemos los límites del eje y como enteros
 # Muestra el gráfico de barras
-st.pyplot(fig)
+st.pyplot(fig4)
+
+# Botón para generar y descargar el PDF
+pdf_buffer4 = create_pdf4(fig4)
+st.download_button(
+    label="Generar y Descargar Report4",
+    data=pdf_buffer4,
+    file_name="report4.pdf",
+    mime="application/pdf"
+)
+
 
 
 
