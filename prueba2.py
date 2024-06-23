@@ -6,6 +6,7 @@ import numpy as np
 from datetime import datetime
 from reporte1 import create_pdf
 from reporte1 import create_pdf2
+from reporte1 import create_pdf3
 
 st.header('Reportes usando Python', divider='rainbow')
 st.title("Resultados de análisis de discotecas")
@@ -92,8 +93,7 @@ ax.set_title(f'Distribución de reservas realizadas por fecha seleccionada: {dat
 st.pyplot(fig1)
 # Muestra el número total de filas
 st.write(f'Total de reservas para la fecha {date_input}: {len(filtered_data)}')
-# Guardar el gráfico en la lista de figuras para el PDF
-figs = [fig1]
+
 # Botón para generar y descargar el PDF
 pdf_buffer1 = create_pdf2(fig1)
 st.download_button(
@@ -108,7 +108,7 @@ st.download_button(
 # -------------------------------
 # Segundo gráfico de líneas
 # -------------------------------
-st.text('REPORTE DE RESERVAS REALIZADAS EN UNA FECHA')
+st.text('3. REPORTE DE RESERVAS REALIZADAS EN UN MES Y DISCOTECA')
 selected_month = st.selectbox('Selecciona un mes:', list(months.keys()), key='month_select_145')
 # Campo de selección para elegir un nombre
 names = df['discoteca'].unique()
@@ -119,7 +119,7 @@ filtered_data = df[(df['fechaHora'].dt.month == month_num) & (df['discoteca'] ==
 # Cuenta el número de filas para cada día del mes
 daily_counts = filtered_data['fechaHora'].dt.day.value_counts().sort_index()
 # Crea un gráfico de líneas usando Matplotlib
-fig, ax = plt.subplots()
+fig3, ax = plt.subplots()
 #ax.plot(daily_counts.index, daily_counts.values, marker='o')
 ax.plot(daily_counts.index, daily_counts.values)
 ax.set_xlabel('Día del mes')
@@ -130,8 +130,14 @@ st.pyplot(fig)
 # Muestra el DataFrame filtrado (opcional)
 if st.checkbox('Mostrar dataframe de reservas realizadas en una fecha'):
     st.write(filtered_data)
-
-
+# Botón para generar y descargar el PDF
+pdf_buffer3 = create_pdf3(fig3)
+st.download_button(
+    label="Generar y Descargar Report3",
+    data=pdf_buffer1,
+    file_name="report2.pdf",
+    mime="application/pdf"
+)
 
 
 #clientes por nummesa
