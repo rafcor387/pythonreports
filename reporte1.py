@@ -98,7 +98,7 @@ def create_pdf2(figs, logo_path="logo6.jpg"):
  
     # Ajustar el tamaño y la posición vertical del gráfico en el PDF
 # Ajustar el tamaño y la posición vertical del gráfico en el PDF
-    c.drawImage("temp_plot.png", 100, 300, width=400, height=300, preserveAspectRatio=True, anchor="c")
+    c.drawImage("temp_plot.png", 100, 400, width=400, height=300, preserveAspectRatio=True, anchor="c")
 
 
 
