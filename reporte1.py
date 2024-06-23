@@ -60,6 +60,7 @@ def create_pdf(figs, logo_path="logo6.jpg"):
     buffer.seek(0)
     return buffer
 
+
 def create_pdf2(figs, logo_path="logo6.jpg"):
     buffer = BytesIO()
     c = canvas.Canvas(buffer, pagesize=letter)
@@ -73,7 +74,7 @@ def create_pdf2(figs, logo_path="logo6.jpg"):
     c.setFont("Helvetica-Bold", 16)
     c.drawString(150, height - 35, "Reporte del numero de reservas")
     c.setFont("Helvetica-Bold", 16)
-    c.drawString(200, height - 60, "en una fecha en todas las discotecas")
+    c.drawString(200, height - 60, "en una fecha en todas las dicotecas")
 
     # Fecha
     c.setFont("Helvetica", 12)
@@ -94,12 +95,17 @@ def create_pdf2(figs, logo_path="logo6.jpg"):
     # Guardar el gráfico en un archivo temporal
     temp_plot_file = "temp_plot.png"
     figs.savefig(temp_plot_file)
-
+ 
     # Ajustar el tamaño y la posición vertical del gráfico en el PDF
-    c.drawImage(temp_plot_file, 100, 100, width=400, height=300, preserveAspectRatio=True)
+# Ajustar el tamaño y la posición vertical del gráfico en el PDF
+    c.drawImage("temp_plot.png", 100, 300, width=400, height=300, preserveAspectRatio=True, anchor="c")
+
+
 
     # Eliminar la imagen temporal después de usarla
-    os.remove(temp_plot_file)
+    os.remove("temp_plot.png")
+
+  
 
     c.showPage()
     c.save()
