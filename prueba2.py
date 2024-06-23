@@ -54,11 +54,6 @@ figs.append(fig)
 # Función para crear el PDF con título y párrafo
 # Función para crear el PDF con título y párrafo
 def create_pdf():
-    from reportlab.lib.pagesizes import letter
-    from reportlab.pdfgen import canvas
-    import os
-    from io import BytesIO
-
     # Crear el documento PDF
     buffer = BytesIO()
     c = canvas.Canvas(buffer, pagesize=letter)
@@ -66,10 +61,12 @@ def create_pdf():
     # Título
     c.setFont("Helvetica-Bold", 16)
     c.drawString(100, 750, "Reporte de Reservas de Clientes")
+    
     # Párrafo
     c.setFont("Helvetica", 12)
     text = "Este es un PDF generado desde Streamlit. Aquí se muestra información sobre reservas de clientes."
     c.drawString(100, 730, text)
+    
     # Agregar los gráficos al PDF
     y_offset = 700
     for fig in figs:
@@ -85,10 +82,11 @@ def create_pdf():
     buffer.seek(0)
     return buffer
 
-# Botón para generar el PDF
-if st.button("Generar PDF"):
+# Botón para generar y descargar el PDF
+if st.button("Generar y Descargar PDF"):
     pdf_buffer = create_pdf()
     st.success("PDF generado con éxito!")
+    
     # Proporcionar enlace para descargar el PDF
     st.download_button(
         label="Descargar PDF",
