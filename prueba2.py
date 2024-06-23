@@ -6,6 +6,7 @@ import numpy as np
 from io import BytesIO
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
+from datetime import datetime
 import os
 
 st.header('Gráficas utilizando Pandas y Streamlit', divider='rainbow')
@@ -52,30 +53,55 @@ if st.checkbox(f'Mostrar dataframe de reservas de {cliente7} en {selected_name44
     st.write(filtered_data76)
 # Guardar el gráfico en la lista de figuras para el PDF
 figs.append(fig)
-# Función para crear el PDF con título y párrafo
-# Función para crear el PDF con título y párrafo
+
 # Función para crear el PDF con título y párrafo
 def create_pdf():
     # Crear el documento PDF
     buffer = BytesIO()
     c = canvas.Canvas(buffer, pagesize=letter)
 
+    # Agregar logo
+    logo_path = "/logo6.png"  # Reemplaza con la ruta a tu logo
+    c.drawImage(logo_path, 30, 720, width=80, height=80)
+
     # Título
     c.setFont("Helvetica-Bold", 16)
-    c.drawString(100, 750, "Reporte de Reservas de Clientes")
+    c.drawString(130, 770, "Reporte de número de reservas esperadas")
+    c.setFont("Helvetica-Bold", 12)
+    c.drawString(200, 755, "por día de la semana")
     
-    # Párrafo
+    # Fecha
     c.setFont("Helvetica", 12)
-    text = "Este es un PDF generado desde Streamlit. Aquí se muestra información sobre reservas de clientes."
-    c.drawString(100, 730, text)
-    
+    date_str = datetime.now().strftime("%d-%m-%Y %H:%M:%S")
+    c.drawString(400, 740, f"Fecha: {date_str}")
+
+    # Párrafo
+    text = ("Mensaje extraído desde la BD: Este informe presenta una proyección del número esperado de reservas "
+            "para cada día de la semana, basada en el análisis histórico de datos de reservas. Hemos utilizado técnicas "
+            "de regresión lineal para modelar la relación entre el día de la semana y el número de reservas, lo que nos "
+            "permite realizar predicciones con un cierto grado de confianza.")
+    text_lines = text.split("\n")
+    text_y = 700
+    c.setFont("Helvetica", 12)
+    for line in text_lines:
+        c.drawString(30, text_y, line)
+        text_y -= 15
+
     # Agregar el gráfico al pie de la página
     fig = figs[0]
     fig.savefig("temp_plot.png")  # Guardar el gráfico como imagen temporal
-    c.drawImage("temp_plot.png", 100, 50, width=400, height=300)  # Ajustar la posición vertical e horizontal
+    c.drawImage("temp_plot.png", 100, 100, width=400, height=300)  # Ajustar la posición vertical e horizontal
     
     # Eliminar la imagen temporal después de usarla
     os.remove("temp_plot.png")
+
+    # Firmas
+    c.drawString(100, 50, "Ing. Rodian Raskólnikov")
+    c.drawString(100, 35, "Ing. Sistemas.")
+    c.drawString(400, 50, "Ing. Oscar Quiroga")
+    c.drawString(400, 35, "Director.")
+    
+    c.showPage()
     c.save()
     
     buffer.seek(0)
