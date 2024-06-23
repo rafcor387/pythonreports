@@ -54,7 +54,6 @@ if st.checkbox(f'Mostrar dataframe de reservas de {cliente7} en {selected_name44
 figs.append(fig)
 # Función para crear el PDF con título y párrafo
 # Función para crear el PDF con título y párrafo
-
 # Función para crear el PDF con título y párrafo
 def create_pdf():
     # Crear el documento PDF
@@ -70,14 +69,11 @@ def create_pdf():
     text = "Este es un PDF generado desde Streamlit. Aquí se muestra información sobre reservas de clientes."
     c.drawString(100, 730, text)
     
-    # Agregar los gráficos al PDF
-    y_offset = 700
-    for fig in figs:
-        fig.savefig("temp_plot.png")  # Guardar el gráfico como imagen temporal
-        c.drawImage("temp_plot.png", 100, y_offset, width=400, height=300)
-        y_offset -= 350  # Ajustar la posición vertical para el próximo gráfico
-        c.showPage()  # Agregar una nueva página para cada gráfico
-
+    # Agregar el gráfico al pie de la página
+    fig = figs[0]
+    fig.savefig("temp_plot.png")  # Guardar el gráfico como imagen temporal
+    c.drawImage("temp_plot.png", 100, 50, width=400, height=300)  # Ajustar la posición vertical e horizontal
+    
     # Eliminar la imagen temporal después de usarla
     os.remove("temp_plot.png")
     c.save()
