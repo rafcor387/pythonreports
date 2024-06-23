@@ -134,8 +134,8 @@ if st.checkbox('Mostrar dataframe de reservas realizadas en una fecha'):
 pdf_buffer3 = create_pdf3(fig3)
 st.download_button(
     label="Generar y Descargar Report3",
-    data=pdf_buffer1,
-    file_name="report2.pdf",
+    data=pdf_buffer3,
+    file_name="report3.pdf",
     mime="application/pdf"
 )
 
