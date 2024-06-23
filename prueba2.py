@@ -271,7 +271,7 @@ filtered_data_cancelled = df[(df['fechaHora'].dt.month == month_num1) &
 daily_counts_cancelled = filtered_data_cancelled['fechaHora'].dt.day.value_counts().sort_index()
 # Crea un gráfico de barras usando Matplotlib
 fig7, ax = plt.subplots()
-ax.bar(daily_counts_cancelled.index, daily_counts_cancelled.values)
+ax.plot(daily_counts_cancelled.index, daily_counts_cancelled.values)
 ax.set_xlabel('Día del mes')
 ax.set_ylabel('Número de reservas canceladas')
 ax.set_title(f'Número de reservas canceladas por día en {selected_month1} para {selected_name1}')
