@@ -77,18 +77,29 @@ date_input = st.date_input('Selecciona una fecha:', default_date)
 filtered_data = df[df['fechaHora'].dt.date == date_input]
 # Calcula el total de registros para cada nombre
 nombre_counts = filtered_data['discoteca'].value_counts()
+
+# Crear una figura y ejes
 fig1, ax = plt.subplots()
+
+# Generar el gráfico de pastel
 wedges, texts, autotexts = ax.pie(
     nombre_counts, labels=nombre_counts.index, autopct='%1.1f%%', startangle=90)
+
+# Colocar la leyenda debajo del gráfico
 ax.legend(
     wedges, [f'{name}: {count} reservas' for name, count in nombre_counts.items()],
-    title='Discotecas', loc='center left', bbox_to_anchor=(1, 0, 0.5, 1))
-ax.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
+    title='Discotecas', loc='upper center', bbox_to_anchor=(0.5, -0.1), shadow=True, ncol=2)
+
+# Ajustar el tamaño del gráfico de pastel
+ax.axis('equal')
 ax.set_title(f'Distribución de reservas realizadas por fecha seleccionada: {date_input}')
+
 # Muestra el gráfico de pastel
-st.pyplot(fig1)
+st.pyplot(fig)
+
 # Muestra el número total de filas
 st.write(f'Total de reservas para la fecha {date_input}: {len(filtered_data)}')
+
 # Guardar el gráfico en la lista de figuras para el PDF
 figs.append(fig1)
 # Botón para generar y descargar el PDF
