@@ -3,16 +3,8 @@ import streamlit as st
 import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
-from io import BytesIO
-from reportlab.lib.pagesizes import letter
-from reportlab.pdfgen import canvas
-from reportlab.lib.utils import ImageReader
-from reportlab.lib.units import inch
-from reportlab.platypus import Paragraph, SimpleDocTemplate, Spacer
-from reportlab.lib.styles import getSampleStyleSheet
 from datetime import datetime
 from reporte1 import create_pdf
-import os
 
 st.header('Reportes usando Python', divider='rainbow')
 st.title("Resultados de análisis de discotecas")
@@ -33,6 +25,7 @@ if st.checkbox('Mostrar dataframe'):
     st.write(df)
 # Crear gráficos
 figs = []
+
 # Primer gráfico de reservas de un cliente en una discoteca por meses
 st.text('1. RESERVAS DE CLIENTES EN UNA DISCOTECA POR MESES')
 cliente7 = st.selectbox('Selecciona el cliente:', df['cliente'].unique())
@@ -60,7 +53,7 @@ if st.checkbox(f'Mostrar dataframe de reservas de {cliente7} en {selected_name44
 figs.append(fig)
 
 # Botón para generar y descargar el PDF
-pdf_buffer = create_pdf(figs)
+pdf_buffer = create_pdf(fig)
 st.download_button(
     label="Generar y Descargar PDF",
     data=pdf_buffer,
@@ -74,7 +67,7 @@ st.download_button(
 # -------------------------------
 # Primer gráfico de pie
 # -------------------------------
-st.text('REPORTE DE RESERVAS REALIZADAS EN UNA FECHA')
+st.text('2. REPORTE DE RESERVAS REALIZADAS EN UNA FECHA')
 # Establece la fecha por defecto
 default_date = datetime(2023, 1, 1)
 # Campo de texto para filtrar por fecha con fecha por defecto
@@ -83,7 +76,7 @@ date_input = st.date_input('Selecciona una fecha:', default_date)
 filtered_data = df[df['fechaHora'].dt.date == date_input]
 # Calcula el total de registros para cada nombre
 nombre_counts = filtered_data['discoteca'].value_counts()
-fig, ax = plt.subplots()
+fig1, ax = plt.subplots()
 wedges, texts, autotexts = ax.pie(
     nombre_counts, labels=nombre_counts.index, autopct='%1.1f%%', startangle=90)
 ax.legend(
@@ -92,12 +85,19 @@ ax.legend(
 ax.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
 ax.set_title(f'Distribución de reservas realizadas por fecha seleccionada: {date_input}')
 # Muestra el gráfico de pastel
-st.pyplot(fig)
+st.pyplot(fig1)
 # Muestra el número total de filas
 st.write(f'Total de reservas para la fecha {date_input}: {len(filtered_data)}')
-# Campo de selección para elegir entre Forum, Pacha, Zouk Boulevard
-#selected_location = st.selectbox('Selecciona una ubicación:', ['Forum', 'Pacha', 'Zouk Boulevard'])
+# Guardar el gráfico en la lista de figuras para el PDF
 
+# Botón para generar y descargar el PDF
+pdf_buffer = create_pdf(fig1)
+st.download_button(
+    label="Generar y Descargar PDF",
+    data=pdf_buffer,
+    file_name="report.pdf",
+    mime="application/pdf"
+)
 
 
 
