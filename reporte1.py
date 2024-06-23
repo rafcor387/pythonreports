@@ -38,7 +38,7 @@ def create_pdf(figs, logo_path="logo6.jpg"):
     style = styles["BodyText"]
     p = Paragraph(text, style)
     p.wrapOn(c, width - 150, height - 320)
-    p.drawOn(c, 80, height - 200)
+    p.drawOn(c, 80, height - 180)
 
     # Agregar el gráfico al pie de la página
     #fig = figs[0]
