@@ -20,14 +20,14 @@ def create_pdf(figs, logo_path="logo6.jpg"):
 
     # Título
     c.setFont("Helvetica-Bold", 16)
-    c.drawString(130, height - 30, "Reporte de número de reservas esperadas")
-    c.setFont("Helvetica-Bold", 12)
-    c.drawString(200, height - 45, "por día de la semana")
+    c.drawString(130, height - 35, "Reporte de número de reservas del cliente")
+    c.setFont("Helvetica-Bold", 16)
+    c.drawString(200, height - 50, "por mes en una discoteca")
 
     # Fecha
     c.setFont("Helvetica", 12)
     date_str = datetime.now().strftime("%d-%m-%Y %H:%M:%S")
-    c.drawString(400, height - 60, f"Fecha: {date_str}")
+    c.drawString(400, height - 70, f"Fecha: {date_str}")
 
     # Párrafo
     text = ("Este reporte presenta una proyección del número esperado de reservas "
@@ -37,13 +37,13 @@ def create_pdf(figs, logo_path="logo6.jpg"):
     styles = getSampleStyleSheet()
     style = styles["BodyText"]
     p = Paragraph(text, style)
-    p.wrapOn(c, width - 60, height - 400)
-    p.drawOn(c, 30, height - 200)
+    p.wrapOn(c, width - 60, height - 300)
+    p.drawOn(c, 30, height - 170)
 
     # Agregar el gráfico al pie de la página
     fig = figs[0]
     fig.savefig("temp_plot.png")  # Guardar el gráfico como imagen temporal
-    c.drawImage("temp_plot.png", 100, 100, width=400, height=300)  # Ajustar la posición vertical e horizontal
+    c.drawImage("temp_plot.png", 100, 100, width=400, height=250)  # Ajustar la posición vertical e horizontal
 
     # Eliminar la imagen temporal después de usarla
     os.remove("temp_plot.png")

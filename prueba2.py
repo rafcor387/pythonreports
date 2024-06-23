@@ -14,7 +14,7 @@ from datetime import datetime
 from reporte1 import create_pdf
 import os
 
-st.header('Gráficas utilizando Pandas y Streamlit', divider='rainbow')
+st.header('Reportes usando Python', divider='rainbow')
 st.title("Resultados de análisis de discotecas")
 df = pd.read_csv('datsetdisco.csv')
 # Convierte la columna 'fechaHora' al tipo de dato de fecha y hora
