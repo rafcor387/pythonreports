@@ -70,18 +70,18 @@ def create_pdf():
     c.setFont("Helvetica", 12)
     text = "Este es un PDF generado desde Streamlit. Aquí se muestra información sobre reservas de clientes."
     c.drawString(100, 730, text)
-    # Agregar los gráficos al PDF
-    y_offset = 700
-    for fig in figs:
-        fig.savefig("temp_plot.png")  # Guardar el gráfico como imagen temporal
-        c.drawImage("temp_plot.png", 100, y_offset, width=400, height=300)
-        y_offset -= 350  # Ajustar la posición vertical para el próximo gráfico
-        c.showPage()  # Agregar una nueva página para cada gráfico
-
-    # Eliminar la imagen temporal después de usarla
-    os.remove("temp_plot.png")
-    c.save()
     
+    # Agregar los gráficos al PDF
+    y_offset = 550  # Ajusta la posición vertical para la figura
+    for fig in figs:
+        temp_file = tempfile.NamedTemporaryFile(delete=False, suffix=".png")
+        fig.savefig(temp_file.name)  # Guardar el gráfico como imagen temporal
+        c.drawImage(temp_file.name, 100, y_offset, width=400, height=300)
+        y_offset -= 400  # Ajustar la posición vertical para el próximo gráfico
+        temp_file.close()
+        os.remove(temp_file.name)  # Eliminar la imagen temporal después de usarla
+    
+    c.save()
     buffer.seek(0)
     return buffer
 
@@ -89,10 +89,11 @@ def create_pdf():
 if st.button("Generar PDF"):
     pdf_buffer = create_pdf()
     st.success("PDF generado con éxito!")
-    # Proporcionar enlace para descargar el PDF
-    st.download_button(
-        label="Descargar PDF",
-        data=pdf_buffer,
-        file_name="report.pdf",
-        mime="application/pdf"
-    )
+    
+    # Guardar el PDF en un archivo temporal
+    temp_file = tempfile.NamedTemporaryFile(delete=False, suffix=".pdf")
+    temp_file.write(pdf_buffer.getvalue())
+    temp_file.close()
+    
+    # Abrir el PDF en una nueva ventana del navegador
+    webbrowser.open_new_tab(temp_file.name)
