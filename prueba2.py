@@ -11,6 +11,9 @@ from reporte1 import create_pdf4
 from reporte1 import create_pdf5
 from reporte1 import create_pdf6
 from reporte1 import create_pdf7
+from reporte1 import create_pdf8
+from reporte1 import create_pdf9
+
 
 
 st.header('Reportes usando Python', divider='rainbow')
@@ -189,19 +192,28 @@ st.download_button(
 
 
 #violin
+st.text('5. violin')
 selected_month9 = st.selectbox('Selecciona un mes:', list(months.keys()), key='month_select_9')
 # Filtra los registros que coinciden con el mes seleccionado
 month_num9 = months[selected_month9]
 filtered_data9 = df[df['fecha'].dt.month == month_num9]
 # Crear un gráfico de violín del número de reservas por discoteca
-fig, ax = plt.subplots(figsize=(10, 6))
+fig5, ax = plt.subplots(figsize=(10, 6))
 sns.violinplot(data=filtered_data9, x='discoteca', y='idMesa', ax=ax)
 ax.set_title(f'Distribución de reservas por discoteca en {selected_month9}')
 ax.set_xlabel('Discoteca')
 ax.set_ylabel('Número de reservas (idMesa)')
 # Mostrar el gráfico de violín en Streamlit
-st.pyplot(fig)
+st.pyplot(fig5)
 
+# Botón para generar y descargar el PDF
+pdf_buffer5 = create_pdf5(fig5)
+st.download_button(
+    label="Generar y Descargar Report5",
+    data=pdf_buffer5,
+    file_name="report5.pdf",
+    mime="application/pdf"
+)
 
 
 
@@ -218,25 +230,34 @@ st.pyplot(fig)
 
 
 #boxplot
+st.text('6. boxplot')
 selected_month5 = st.selectbox('Selecciona un mes:', list(months.keys()), key='month_select_6')
 # Filtra los registros que coinciden con el mes seleccionado
 month_num5 = months[selected_month5]
 filtered_data5 = df[df['fecha'].dt.month == month_num5]
 # Crear un boxplot de las reservas diarias por discoteca para el mes seleccionado
-fig, ax = plt.subplots(figsize=(10, 6))
+fig6, ax = plt.subplots(figsize=(10, 6))
 sns.boxplot(data=filtered_data5, x='discoteca', y='idMesa', ax=ax)
 ax.set_title(f'Boxplot de reservas por día y discoteca en {selected_month5}')
 ax.set_xlabel('Discoteca')
 ax.set_ylabel('Número de reservas')
 # Mostrar el boxplot en Streamlit
-st.pyplot(fig)
+st.pyplot(fig6)
+# Botón para generar y descargar el PDF
+pdf_buffer6 = create_pdf6(fig6)
+st.download_button(
+    label="Generar y Descargar Report6",
+    data=pdf_buffer6,
+    file_name="report6.pdf",
+    mime="application/pdf"
+)
 
 
 
 # -------------------------------
 # Tercero gráfico de barras
 # -------------------------------
-st.text('REPORTE DE RESERVAS CANCELADAS')
+st.text('7. REPORTE DE RESERVAS CANCELADAS')
 # Campo de selección para elegir un mes
 selected_month1 = st.selectbox('Selecciona un mes para reservas canceladas:', list(months.keys()), key='month_select_2')
 # Campo de selección para elegir una discoteca
@@ -249,23 +270,31 @@ filtered_data_cancelled = df[(df['fechaHora'].dt.month == month_num1) &
 # Cuenta el número de filas para cada día del mes
 daily_counts_cancelled = filtered_data_cancelled['fechaHora'].dt.day.value_counts().sort_index()
 # Crea un gráfico de barras usando Matplotlib
-fig, ax = plt.subplots()
+fig7, ax = plt.subplots()
 ax.bar(daily_counts_cancelled.index, daily_counts_cancelled.values)
 ax.set_xlabel('Día del mes')
 ax.set_ylabel('Número de reservas canceladas')
 ax.set_title(f'Número de reservas canceladas por día en {selected_month1} para {selected_name1}')
 # Muestra el gráfico de barras
-st.pyplot(fig)
+st.pyplot(fig7)
 # Muestra el DataFrame filtrado (opcional)
 if st.checkbox('Mostrar dataframe de reservas canceladas'):
     st.write(filtered_data_cancelled)
+# Botón para generar y descargar el PDF
+pdf_buffer7 = create_pdf7(fig7)
+st.download_button(
+    label="Generar y Descargar Report7",
+    data=pdf_buffer7,
+    file_name="report7.pdf",
+    mime="application/pdf"
+)
 
 
 
 # -------------------------------
 # Cuarto gráfico de histogramas
 # -------------------------------
-st.text('REPORTE DE FECHAS RESERVADAS')
+st.text('8. REPORTE DE FECHAS RESERVADAS')
 # Campo de selección para elegir un mes
 selected_month2 = st.selectbox('Selecciona un mes para fechas reservadas:', list(months.keys()), key='month_select_3')
 # Campo de selección para elegir una discoteca
@@ -277,16 +306,24 @@ filtered_data_reserved = df[(df['fecha'].dt.month == month_num2) &
 # Extrae los días del mes de las fechas filtradas
 days_reserved = filtered_data_reserved['fecha'].dt.day
 # Crea un histograma usando Matplotlib
-fig, ax = plt.subplots()
+fig8, ax = plt.subplots()
 ax.hist(days_reserved, bins=range(1, 32), edgecolor='black')
 ax.set_xlabel('Día del mes')
 ax.set_ylabel('Número de reservas para el día')
 ax.set_title(f'Número de fechas reservadas por día en {selected_month2} para {selected_name2}')
 # Muestra el histograma
-st.pyplot(fig)
+st.pyplot(fig8)
 # Muestra el DataFrame filtrado (opcional)
 if st.checkbox('Mostrar dataframe de reporte de fechas reservadas'):
     st.write(filtered_data_reserved)
+# Botón para generar y descargar el PDF
+pdf_buffer8 = create_pdf8(fig8)
+st.download_button(
+    label="Generar y Descargar Report8",
+    data=pdf_buffer8,
+    file_name="report8.pdf",
+    mime="application/pdf"
+)
 
 
 
@@ -294,6 +331,7 @@ if st.checkbox('Mostrar dataframe de reporte de fechas reservadas'):
 # -------------------------------
 # Quinto gráfico de Headmap
 # -------------------------------
+st.text('9. REPORTE DE FECHAS RESERVADAS')
 selected_month3 = st.selectbox('Selecciona un mes:', list(months.keys()), key='month_select_4')
 # Filtra los registros que coinciden con el mes seleccionado
 month_num3 = months[selected_month3]
@@ -301,10 +339,18 @@ filtered_data3 = df[df['fechaHora'].dt.month == month_num3]
 # Crear una tabla de conteo de reservas por día y discoteca
 heatmap_data = filtered_data3.pivot_table(index=filtered_data3['fecha'].dt.day, columns='discoteca', aggfunc='size', fill_value=0)
 # Crear el heatmap usando Seaborn
-fig, ax = plt.subplots(figsize=(10, 6))
+fig9, ax = plt.subplots(figsize=(10, 6))
 sns.heatmap(heatmap_data, annot=True, fmt="d", cmap='YlGnBu', ax=ax)
 ax.set_title(f'Reservas diarias por discoteca en {selected_month3}')
 ax.set_xlabel('Discoteca')
 ax.set_ylabel('Día del mes')
 # Mostrar el heatmap en Streamlit
 st.pyplot(fig)
+# Botón para generar y descargar el PDF
+pdf_buffer9 = create_pdf9(fig9)
+st.download_button(
+    label="Generar y Descargar Report9",
+    data=pdf_buffer9,
+    file_name="report9.pdf",
+    mime="application/pdf"
+)
