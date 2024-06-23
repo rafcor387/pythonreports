@@ -61,7 +61,7 @@ def create_pdf():
     c = canvas.Canvas(buffer, pagesize=letter)
 
     # Agregar logo
-    logo_path = "/logo6.png"  # Reemplaza con la ruta a tu logo
+    logo_path = "\logo6.jpg"  # Reemplaza con la ruta a tu logo
     c.drawImage(logo_path, 30, 720, width=80, height=80)
 
     # Título
