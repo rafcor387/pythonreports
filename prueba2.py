@@ -53,6 +53,8 @@ if st.checkbox(f'Mostrar dataframe de reservas de {cliente7} en {selected_name44
 figs.append(fig)
 # Función para crear el PDF con título y párrafo
 # Función para crear el PDF con título y párrafo
+
+# Función para crear el PDF con título y párrafo
 def create_pdf():
     # Crear el documento PDF
     buffer = BytesIO()
@@ -83,14 +85,10 @@ def create_pdf():
     return buffer
 
 # Botón para generar y descargar el PDF
-if st.button("Generar y Descargar PDF"):
-    pdf_buffer = create_pdf()
-    st.success("PDF generado con éxito!")
-    
-    # Proporcionar enlace para descargar el PDF
-    st.download_button(
-        label="Descargar PDF",
-        data=pdf_buffer,
-        file_name="report.pdf",
-        mime="application/pdf"
-    )
+pdf_buffer = create_pdf()
+st.download_button(
+    label="Generar y Descargar PDF",
+    data=pdf_buffer,
+    file_name="report.pdf",
+    mime="application/pdf"
+)
