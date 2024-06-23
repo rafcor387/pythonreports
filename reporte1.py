@@ -239,7 +239,7 @@ def create_pdf5(figs, logo_path="logo6.jpg"):
 
     # Párrafo
     text = ("Este reporte presenta un análisis detallado de la distribución de reservas realizadas en diversas discotecas" 
-            "durante un mes seleccionado. Utilizando gráficos de violín, se examina la variabilidad en el número de reservas" 
+            " durante un mes seleccionado. Utilizando gráficos de violín, se examina la variabilidad en el número de reservas" 
             "(identificadas por su idMesa) entre las diferentes discotecas. Este análisis proporciona una visión clara de cómo"
             "se distribuyen las reservas a lo largo del mes en cada discoteca, lo que puede ser útil para comprender los patrones de"
             "demanda y la popularidad relativa de cada establecimiento durante ese período.")
