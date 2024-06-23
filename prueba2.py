@@ -59,33 +59,34 @@ def create_pdf():
     # Crear el documento PDF
     buffer = BytesIO()
     c = canvas.Canvas(buffer, pagesize=letter)
+    width, height = letter
 
     # Agregar logo
     logo_path = "logo6.jpg"  # Reemplaza con la ruta a tu logo
-    c.drawImage(logo_path, 30, 720, width=80, height=80)
+    logo = ImageReader(logo_path)
+    c.drawImage(logo, 30, height - 80, width=80, height=80)
 
     # Título
     c.setFont("Helvetica-Bold", 16)
-    c.drawString(130, 770, "Reporte de número de reservas esperadas")
+    c.drawString(130, height - 30, "Reporte de número de reservas esperadas")
     c.setFont("Helvetica-Bold", 12)
-    c.drawString(200, 755, "por día de la semana")
+    c.drawString(200, height - 45, "por día de la semana")
     
     # Fecha
     c.setFont("Helvetica", 12)
     date_str = datetime.now().strftime("%d-%m-%Y %H:%M:%S")
-    c.drawString(400, 740, f"Fecha: {date_str}")
+    c.drawString(400, height - 60, f"Fecha: {date_str}")
 
     # Párrafo
     text = ("Mensaje extraído desde la BD: Este informe presenta una proyección del número esperado de reservas "
             "para cada día de la semana, basada en el análisis histórico de datos de reservas. Hemos utilizado técnicas "
             "de regresión lineal para modelar la relación entre el día de la semana y el número de reservas, lo que nos "
             "permite realizar predicciones con un cierto grado de confianza.")
-    text_lines = text.split("\n")
-    text_y = 700
-    c.setFont("Helvetica", 12)
-    for line in text_lines:
-        c.drawString(30, text_y, line)
-        text_y -= 15
+    styles = getSampleStyleSheet()
+    style = styles["BodyText"]
+    p = Paragraph(text, style)
+    p.wrapOn(c, width - 60, height - 400)
+    p.drawOn(c, 30, height - 200)
 
     # Agregar el gráfico al pie de la página
     fig = figs[0]
