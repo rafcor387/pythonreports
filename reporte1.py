@@ -20,7 +20,7 @@ def create_pdf(figs, logo_path="logo6.jpg"):
 
     # Título
     c.setFont("Helvetica-Bold", 16)
-    c.drawString(130, height - 35, "Reporte de número de reservas del cliente")
+    c.drawString(150, height - 35, "Reporte de número de reservas del cliente")
     c.setFont("Helvetica-Bold", 16)
     c.drawString(200, height - 60, "por mes en una discoteca")
 
