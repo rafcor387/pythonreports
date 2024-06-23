@@ -41,8 +41,8 @@ def create_pdf(figs, logo_path="logo6.jpg"):
     p.drawOn(c, 80, height - 170)
 
     # Agregar el gráfico al pie de la página
-    fig = figs[0]
-    fig.savefig("temp_plot.png")  # Guardar el gráfico como imagen temporal
+    #fig = figs[0]
+    figs.savefig("temp_plot.png")  # Guardar el gráfico como imagen temporal
     c.drawImage("temp_plot.png", 100, 300, width=400, height=300)  # Ajustar la posición vertical e horizontal
 
     # Eliminar la imagen temporal después de usarla
