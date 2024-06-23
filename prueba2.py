@@ -37,7 +37,7 @@ if st.checkbox('Mostrar dataframe'):
 figs = []
 
 # Primer gráfico de reservas de un cliente en una discoteca por meses
-st.text('1. Análisis de Reservas Mensuales en Discotecas por Cliente')
+st.text('1. Análisis Mensual de Reservas en Discotecas por Cliente')
 cliente7 = st.selectbox('Selecciona el cliente:', df['cliente'].unique())
 selected_name44 = st.selectbox('Selecciona la discoteca:', df['discoteca'].unique())
 filtered_data76 = df[(df['cliente'] == cliente7) & (df['discoteca'] == selected_name44)]
@@ -77,7 +77,7 @@ st.download_button(
 # -------------------------------
 # Primer gráfico de pie
 # -------------------------------
-st.text('2. REPORTE DE RESERVAS REALIZADAS EN UNA FECHA')
+st.text('2. Informe de Distribución de Reservas en Discotecas para una Fecha Específica')
 # Establece la fecha por defecto
 default_date = datetime(2023, 1, 1)
 # Campo de texto para filtrar por fecha con fecha por defecto
@@ -116,7 +116,7 @@ st.download_button(
 # -------------------------------
 # Segundo gráfico de líneas
 # -------------------------------
-st.text('3. REPORTE DE RESERVAS REALIZADAS EN UN MES Y DISCOTECA')
+st.text('3. Análisis de Reservas Mensuales por Discoteca')
 selected_month = st.selectbox('Selecciona un mes:', list(months.keys()), key='month_select_1485')
 # Campo de selección para elegir un nombre
 names = df['discoteca'].unique()
@@ -149,7 +149,7 @@ st.download_button(
 
 
 #clientes por nummesa
-st.text('4. Numero de reservas de un cliente por mes y discoteca')
+st.text('4. Análisis de Reservas por Cliente, Mes y Discoteca')
 # Obtener los nombres únicos de los clientes, meses y discotecas
 clientes = df['cliente'].unique()
 #meses = df['fecha'].dt.month_name().unique()

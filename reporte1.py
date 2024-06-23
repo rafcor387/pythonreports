@@ -20,9 +20,9 @@ def create_pdf(figs, logo_path="logo6.jpg"):
 
     # Título
     c.setFont("Helvetica-Bold", 16)
-    c.drawString(150, height - 35, "Reporte de número de reservas del cliente")
+    c.drawString(150, height - 35, "Reporte de Análisis Mensual de Reservas ")
     c.setFont("Helvetica-Bold", 16)
-    c.drawString(200, height - 60, "por mes en una discoteca")
+    c.drawString(200, height - 60, "en Discotecas por Cliente")
 
     # Fecha
     c.setFont("Helvetica", 12)
@@ -30,10 +30,11 @@ def create_pdf(figs, logo_path="logo6.jpg"):
     c.drawString(400, height - 90, f"Fecha: {date_str}")
 
     # Párrafo
-    text = ("Este informe presenta un análisis detallado del número de reservas mensuales realizadas por el cliente" 
-            "seleccionado en la discoteca seleccionada. A través de gráficos de barras, se visualiza la distribución de" 
-            "reservas a lo largo del año, permitiendo identificar patrones y tendencias en la actividad de reservas." 
-            "Además, se proporciona un resumen tabular de los datos filtrados para un análisis más detallado." )
+    text = ("Este informe presenta un análisis detallado del número de reservas realizadas mensualmente" 
+            "en diversas discotecas por parte de nuestros clientes. Utilizando datos históricos, "
+            "examinamos las tendencias de reserva a lo largo del año para cada cliente y discoteca seleccionados. "
+            "Las visualizaciones proporcionadas ofrecen una visión clara del patrón de reservas a lo largo del tiempo," 
+            "lo que permite una mejor comprensión de la actividad de reserva en cada ubicación" )
     styles = getSampleStyleSheet()
     style = styles["BodyText"]
     p = Paragraph(text, style)
@@ -71,9 +72,9 @@ def create_pdf2(figs, logo_path="logo6.jpg"):
 
     # Título
     c.setFont("Helvetica-Bold", 16)
-    c.drawString(150, height - 35, "Reporte del numero de reservas")
+    c.drawString(150, height - 35, "Reporte del nnforme de Distribución de Reservas ")
     c.setFont("Helvetica-Bold", 16)
-    c.drawString(200, height - 60, "en una fecha en todas las dicotecas")
+    c.drawString(200, height - 60, "en Discotecas para una Fecha Específica")
 
     # Fecha
     c.setFont("Helvetica", 12)
@@ -81,10 +82,11 @@ def create_pdf2(figs, logo_path="logo6.jpg"):
     c.drawString(400, height - 90, f"Fecha: {date_str}")
 
     # Párrafo
-    text = ("Este reporte presenta una proyección del número esperado de reservas "
-            "para cada día de la semana, basada en el análisis histórico de datos de reservas. Hemos utilizado técnicas "
-            "de regresión lineal para modelar la relación entre el día de la semana y el número de reservas, lo que nos "
-            "permite realizar predicciones con un cierto grado de confianza.")
+    text = ("Este informe presenta la distribución de reservas realizadas en discotecas para una fecha "
+            "específica seleccionada por el usuario. Mediante un gráfico de pastel, se muestra la proporción" 
+            "de reservas en cada discoteca, permitiendo una visualización clara de la participación de "
+            "cada establecimiento en las reservas totales para el día seleccionado. Además, se proporciona el "
+            "número total de reservas realizadas para la fecha especificada. ")
     styles = getSampleStyleSheet()
     style = styles["BodyText"]
     p = Paragraph(text, style)
@@ -125,9 +127,9 @@ def create_pdf3(figs, logo_path="logo6.jpg"):
 
     # Título
     c.setFont("Helvetica-Bold", 16)
-    c.drawString(150, height - 35, "Reporte de reservas")
+    c.drawString(150, height - 35, "Reporte de análisis de Reservas ")
     c.setFont("Helvetica-Bold", 16)
-    c.drawString(200, height - 60, "por mes en una discotec")
+    c.drawString(200, height - 60, "Mensuales por Discoteca")
 
     # Fecha
     c.setFont("Helvetica", 12)
@@ -135,10 +137,10 @@ def create_pdf3(figs, logo_path="logo6.jpg"):
     c.drawString(400, height - 90, f"Fecha: {date_str}")
 
     # Párrafo
-    text = ("Este reporte presenta una proyección del número esperado de reservas "
-            "para cada día de la semana, basada en el análisis histórico de datos de reservas. Hemos utilizado técnicas "
-            "de regresión lineal para modelar la relación entre el día de la semana y el número de reservas, lo que nos "
-            "permite realizar predicciones con un cierto grado de confianza.")
+    text = ("Este reporte presenta un análisis detallado del número de reservas realizadas mensualmente "
+            "en una selección de discotecas. Selecciona un mes y una discoteca para explorar el número de "
+            "reservas diarias a lo largo del mes. El análisis proporciona una visión general de las tendencias" 
+            "de reserva mensuales y destaca los días con mayor actividad en cada discoteca seleccionada.")
     styles = getSampleStyleSheet()
     style = styles["BodyText"]
     p = Paragraph(text, style)
@@ -177,9 +179,9 @@ def create_pdf4(figs, logo_path="logo6.jpg"):
 
     # Título
     c.setFont("Helvetica-Bold", 16)
-    c.drawString(150, height - 35, "Reporte de numero de reservas del cliente")
+    c.drawString(150, height - 35, "Reporte de análisis de Reservas ")
     c.setFont("Helvetica-Bold", 16)
-    c.drawString(200, height - 60, "por mes y discoteca")
+    c.drawString(200, height - 60, "por Cliente, Mes y Discoteca")
 
     # Fecha
     c.setFont("Helvetica", 12)
@@ -187,10 +189,10 @@ def create_pdf4(figs, logo_path="logo6.jpg"):
     c.drawString(400, height - 90, f"Fecha: {date_str}")
 
     # Párrafo
-    text = ("Este reporte presenta una proyección del número esperado de reservas "
-            "para cada día de la semana, basada en el análisis histórico de datos de reservas. Hemos utilizado técnicas "
-            "de regresión lineal para modelar la relación entre el día de la semana y el número de reservas, lo que nos "
-            "permite realizar predicciones con un cierto grado de confianza.")
+    text = ("Este informe proporciona un análisis detallado de las reservas realizadas por cliente, mes " 
+            "y discoteca. Selecciona un cliente, mes y discoteca para explorar las tendencias de reservas." 
+            "El gráfico de dispersión muestra el número de reservas para el cliente seleccionado durante el mes específico" 
+            "en la discoteca elegida, brindando una visión clara de la distribución de reservas por número de mesa.")
     styles = getSampleStyleSheet()
     style = styles["BodyText"]
     p = Paragraph(text, style)
