@@ -4,8 +4,9 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
 from io import BytesIO
-import tempfile
-import webbrowser
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
+import os
 
 st.header('Gráficas utilizando Pandas y Streamlit', divider='rainbow')
 st.title("Resultados de análisis de discotecas")
