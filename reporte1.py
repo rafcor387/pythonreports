@@ -72,9 +72,9 @@ def create_pdf2(figs, logo_path="logo6.jpg"):
 
     # Título
     c.setFont("Helvetica-Bold", 16)
-    c.drawString(150, height - 35, "Reporte del 2")
+    c.drawString(150, height - 35, "Reporte del numero de reservas")
     c.setFont("Helvetica-Bold", 16)
-    c.drawString(200, height - 60, "por mes en una discoteca")
+    c.drawString(200, height - 60, "en una fecha en todas las dicotecas")
 
     # Fecha
     c.setFont("Helvetica", 12)
@@ -95,7 +95,7 @@ def create_pdf2(figs, logo_path="logo6.jpg"):
     # Agregar el gráfico al pie de la página
     #fig = figs[0]
     figs.savefig("temp_plot.png")  # Guardar el gráfico como imagen temporal
-    c.drawImage("temp_plot.png", 100, 300, width=400, height=300)  # Ajustar la posición vertical e horizontal
+    c.drawImage("temp_plot.png", 100, 500, width=400, height=300)  # Ajustar la posición vertical e horizontal
 
     # Eliminar la imagen temporal después de usarla
     os.remove("temp_plot.png")
