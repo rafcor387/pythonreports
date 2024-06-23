@@ -345,7 +345,7 @@ ax.set_title(f'Reservas diarias por discoteca en {selected_month3}')
 ax.set_xlabel('Discoteca')
 ax.set_ylabel('Día del mes')
 # Mostrar el heatmap en Streamlit
-st.pyplot(fig)
+st.pyplot(fig9)
 # Botón para generar y descargar el PDF
 pdf_buffer9 = create_pdf9(fig9)
 st.download_button(
