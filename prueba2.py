@@ -93,9 +93,9 @@ figs.append(fig1)
 # Botón para generar y descargar el PDF
 pdf_buffer1 = create_pdf(fig1)
 st.download_button(
-    label="Generar y Descargar PDF",
+    label="Generar y Descargar PDF1",
     data=pdf_buffer1,
-    file_name="report.pdf",
+    file_name="report1.pdf",
     mime="application/pdf"
 )
 
