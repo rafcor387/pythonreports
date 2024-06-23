@@ -33,9 +33,7 @@ def create_pdf(figs, logo_path="logo6.jpg"):
     text = ("Este informe presenta un análisis detallado del número de reservas mensuales realizadas por el cliente" 
             "seleccionado en la discoteca seleccionada. A través de gráficos de barras, se visualiza la distribución de" 
             "reservas a lo largo del año, permitiendo identificar patrones y tendencias en la actividad de reservas." 
-            "Además, se proporciona un resumen tabular de los datos filtrados para un análisis más detallado." 
-            "Este informe es útil para comprender el comportamiento de reserva del cliente en una discoteca específica" 
-            "y puede ser utilizado para la toma de decisiones relacionadas con la gestión de reservas y la optimización de servicios.")
+            "Además, se proporciona un resumen tabular de los datos filtrados para un análisis más detallado." )
     styles = getSampleStyleSheet()
     style = styles["BodyText"]
     p = Paragraph(text, style)
