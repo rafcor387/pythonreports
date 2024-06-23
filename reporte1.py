@@ -456,9 +456,7 @@ def create_pdf9(figs, logo_path="logo6.jpg"):
             "Utilizando datos recopilados durante el mes seleccionado, se han examinado las tendencias" 
             "de reserva en cada establecimiento. El informe ofrece una visión general de la distribución" 
             "de las reservas a lo largo del mes, destacando los días de mayor actividad y las preferencias" 
-            "de los clientes en términos de discotecas. El análisis proporciona una comprensión valiosa de los" 
-            "patrones de reserva, lo que puede ayudar a informar estrategias futuras de gestión y promoción para"
-            "mejorar la eficiencia y la satisfacción del cliente.")
+            "de los clientes en términos de discotecas. ")
     styles = getSampleStyleSheet()
     style = styles["BodyText"]
     p = Paragraph(text, style)
