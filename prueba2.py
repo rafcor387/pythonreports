@@ -69,25 +69,18 @@ st.download_button(
 # Primer gráfico de pie
 # -------------------------------
 st.text('2. REPORTE DE RESERVAS REALIZADAS EN UNA FECHA')
-
 # Establece la fecha por defecto
 default_date = datetime(2023, 1, 1)
-
 # Campo de texto para filtrar por fecha con fecha por defecto
 date_input = st.date_input('Selecciona una fecha:', default_date)
-
 # Filtra los registros que coinciden con la fecha seleccionada
 filtered_data = df[df['fechaHora'].dt.date == date_input]
-
 # Calcula el total de registros para cada nombre
 nombre_counts = filtered_data['discoteca'].value_counts()
-
 fig1, ax = plt.subplots()
-
 # Dibuja el gráfico de pastel
 wedges, texts, autotexts = ax.pie(
     nombre_counts, labels=nombre_counts.index, autopct='%1.1f%%', startangle=90)
-
 # Ajusta la leyenda debajo del gráfico
 ax.legend(
     wedges, [f'{name}: {count} reservas' for name, count in nombre_counts.items()],
@@ -95,16 +88,14 @@ ax.legend(
 
 ax.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
 ax.set_title(f'Distribución de reservas realizadas por fecha seleccionada: {date_input}')
-
 # Muestra el gráfico de pastel
 st.pyplot(fig1)
-
 # Muestra el número total de filas
 st.write(f'Total de reservas para la fecha {date_input}: {len(filtered_data)}')
 # Guardar el gráfico en la lista de figuras para el PDF
-figs.append(fig1)
+figs = [fig1]
 # Botón para generar y descargar el PDF
-pdf_buffer1 = create_pdf2(fig1)
+pdf_buffer1 = create_pdf2(figs)
 st.download_button(
     label="Generar y Descargar Report2",
     data=pdf_buffer1,

@@ -60,7 +60,6 @@ def create_pdf(figs, logo_path="logo6.jpg"):
     buffer.seek(0)
     return buffer
 
-
 def create_pdf2(figs, logo_path="logo6.jpg"):
     buffer = BytesIO()
     c = canvas.Canvas(buffer, pagesize=letter)
@@ -95,17 +94,18 @@ def create_pdf2(figs, logo_path="logo6.jpg"):
     # Guardar el gráfico en un archivo temporal
     temp_plot_file = "temp_plot.png"
     figs.savefig(temp_plot_file)
- 
+
     # Ajustar el tamaño y la posición vertical del gráfico en el PDF
-# Ajustar el tamaño y la posición vertical del gráfico en el PDF
-    c.drawImage("temp_plot.png", 100, 300, width=400, height=300, preserveAspectRatio=True, anchor="c")
-
-
+    c.drawImage(temp_plot_file, 100, 300, width=400, height=300, preserveAspectRatio=True, anchor="c")
 
     # Eliminar la imagen temporal después de usarla
-    os.remove("temp_plot.png")
+    os.remove(temp_plot_file)
 
-  
+    # Firmas
+    c.drawString(100, 230, "Ing. Rodian Raskólnikov")
+    c.drawString(130, 215, "Ing. Sistemas.")
+    c.drawString(400, 230, "Ing. Oscar Quiroga")
+    c.drawString(430, 215, "Director.")
 
     c.showPage()
     c.save()
