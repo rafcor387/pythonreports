@@ -6,6 +6,10 @@ import numpy as np
 from io import BytesIO
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
+from reportlab.lib.utils import ImageReader
+from reportlab.lib.units import inch
+from reportlab.platypus import Paragraph, SimpleDocTemplate, Spacer
+from reportlab.lib.styles import getSampleStyleSheet
 from datetime import datetime
 import os
 
