@@ -1,11 +1,18 @@
-# main.py (o el nombre de tu archivo principal)
-
 import pandas as pd
 import streamlit as st
 import matplotlib.pyplot as plt
+import seaborn as sns
 import numpy as np
+from io import BytesIO
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
+from reportlab.lib.utils import ImageReader
+from reportlab.lib.units import inch
+from reportlab.platypus import Paragraph, SimpleDocTemplate, Spacer
+from reportlab.lib.styles import getSampleStyleSheet
 from datetime import datetime
-from reporte1 import create_pdf  # Importa la función create_pdf desde pdf_generator
+from reporte1 import create_pdf
+import os
 
 st.header('Gráficas utilizando Pandas y Streamlit', divider='rainbow')
 st.title("Resultados de análisis de discotecas")
@@ -52,12 +59,13 @@ if st.checkbox(f'Mostrar dataframe de reservas de {cliente7} en {selected_name44
 # Guardar el gráfico en la lista de figuras para el PDF
 figs.append(fig)
 
+
+
 # Botón para generar y descargar el PDF
-if st.button("Generar y Descargar PDF"):
-    pdf_buffer = create_pdf(figs)
-    st.download_button(
-        label="Descargar PDF",
-        data=pdf_buffer,
-        file_name="report.pdf",
-        mime="application/pdf"
-    )
+pdf_buffer = create_pdf(figs)
+st.download_button(
+    label="Generar y Descargar PDF",
+    data=pdf_buffer,
+    file_name="report.pdf",
+    mime="application/pdf"
+)
