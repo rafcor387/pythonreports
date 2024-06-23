@@ -102,11 +102,7 @@ def create_pdf2(figs, logo_path="logo6.jpg"):
     # Eliminar la imagen temporal después de usarla
     os.remove("temp_plot.png")
 
-    # Firmas
-    c.drawString(100, 230, "Ing. Rodian Raskólnikov")
-    c.drawString(130, 215, "Ing. Sistemas.")
-    c.drawString(400, 230, "Ing. Oscar Quiroga")
-    c.drawString(430, 215, "Director.")
+
 
     c.showPage()
     c.save()
