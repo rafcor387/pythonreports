@@ -141,17 +141,21 @@ st.download_button(
 
 
 #clientes por nummesa
+st.text('4. Numero de reservas de un cliente por mes y discoteca')
 # Obtener los nombres únicos de los clientes, meses y discotecas
 clientes = df['cliente'].unique()
-meses = df['fecha'].dt.month_name().unique()
+#meses = df['fecha'].dt.month_name().unique()
 discotecas = df['discoteca'].unique()
 # Selección de usuario
 selected_cliente = st.selectbox('Selecciona un cliente:', clientes)
-selected_mes = st.selectbox('Selecciona un mes:', meses)
+selected_mes = st.selectbox('Selecciona un mes:', list(months.keys()), key='month_select_145')
+# Filtra los registros que coinciden con el mes y el nombre seleccionados
+month_num = months[selected_month]
+#selected_mes = st.selectbox('Selecciona un mes:', meses)
 selected_discoteca = st.selectbox('Selecciona una discoteca:', discotecas)
 # Filtrar los datos según las selecciones del usuario
 filtered_data0 = df[(df['cliente'] == selected_cliente) & 
-                   (df['fecha'].dt.month_name() == selected_mes) & 
+                   (df['fecha'].dt.month == month_num) & 
                    (df['discoteca'] == selected_discoteca)]
 
 # Contar el número de filas para cada valor único de numMesa
